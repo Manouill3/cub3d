@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
+#    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 06:04:01 by mdegache          #+#    #+#              #
-#    Updated: 2025/07/15 09:04:57 by mdegache         ###   ########.fr        #
+#    Updated: 2025/07/15 11:51:44 by tcybak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,16 @@ RESET=\033[0m
 NAME = cub3d
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -lSDL2
+CFLAGS = -Wall -Wextra -Werror -g
+LDFLAGS = -lSDL2
 
 LIB = includes/libft
 LIBFT = includes/libft/libft.a includes/MacroLibX/libmlx.so
 
-SRC = src/main.c
+SRC = 	src/main.c \
+		src/parsing/parsing.c \
+		src/utils/get_next_line.c \
+		src/utils/utils_parsing.c
 
 OBJ_DIR = build
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
@@ -31,7 +35,7 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(SRC) $(LIBFT) $(CFLAGS) -o $(NAME)
+	@$(CC) $(SRC) $(LIBFT) $(CFLAGS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)SUCCESS$(RESET)"
 
 $(LIBFT):

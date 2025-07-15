@@ -6,33 +6,27 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:30:22 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/15 09:38:18 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/15 12:00:12 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
 
-int	check_ext(char *file, char *ext)
+t_cub  *ft_init(t_cub  *cub)
 {
-	int	i;
-	int	j;
+   	cub  = malloc(sizeof(t_cub));
+    if (!cub)
+        return (NULL);
+    return (cub);
+}    
 
-	i = ft_strlen(file) - 1;
-	j = ft_strlen(ext) - 1;
-	if (ft_strlen(file) < 4)
-		return (1);
-	while (j > 0)
-	{
-		if (ext[j] != file[i])
-			return (1);
-		i--;
-		j--;
-	}
-	return (0);	
-}
+
 
 int main(int ac, char **av)
 {
+	t_cub *cub;
+
+	cub = NULL;
 	if (ac == 2)
 	{
 		if (check_ext(av[1], ".cub"))
@@ -40,6 +34,8 @@ int main(int ac, char **av)
 			write(2, "bad extension\n", 14);
 			return (1);
 		}
+		cub = ft_init(cub);
+		ft_parsing(av, cub);
 		return (0);
 	}
 	else 
