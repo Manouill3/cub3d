@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 12:31:44 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/15 14:06:48 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/15 14:25:20 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int ft_check_border(t_cub *cub)
             hor++;
         if (cub->size_ver + 1 == ver)
             return (0);
-        while (cub->map[ver][hor_next] && cub->map[ver][hor_next + 1] != '\0')
+        printf("ver act = %d ver = %d\n",cub->size_ver + 1, ver );
+        while (cub->map[ver] && cub->map[ver + 1][hor_next] && cub->map[ver + 1][hor_next + 1] != '\0')
             hor_next++;
         if (cub->map[ver][hor] != '1' || cub->map[ver + 1][hor_next] != '1')
         {
