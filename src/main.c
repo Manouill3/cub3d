@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:30:22 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/15 12:00:12 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/15 12:39:44 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int main(int ac, char **av)
 		}
 		cub = ft_init(cub);
 		ft_parsing(av, cub);
+		free_all(cub);
 		return (0);
 	}
 	else 

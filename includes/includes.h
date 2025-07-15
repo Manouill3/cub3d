@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/15 11:52:19 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/15 12:40:08 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ int    ft_transfer_map(t_cub *cub, char *tab);
 
 char	*get_next_line(int fd);
 int     ft_strlen_map(char *str);
+
+//free
+
+void	free_all(t_cub *cub);
 
 
 #endif

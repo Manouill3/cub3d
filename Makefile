@@ -6,7 +6,7 @@
 #    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 06:04:01 by mdegache          #+#    #+#              #
-#    Updated: 2025/07/15 11:51:44 by tcybak           ###   ########.fr        #
+#    Updated: 2025/07/15 12:35:10 by tcybak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ LIBFT = includes/libft/libft.a includes/MacroLibX/libmlx.so
 SRC = 	src/main.c \
 		src/parsing/parsing.c \
 		src/utils/get_next_line.c \
-		src/utils/utils_parsing.c
+		src/utils/utils_parsing.c \
+		src/free/ft_free.c
 
 OBJ_DIR = build
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
