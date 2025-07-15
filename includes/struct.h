@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/15 10:49:19 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/15 13:27:19 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 typedef struct s_cub
 {
     char    **map;
-	int			size_ver;
-	int			size_hor;
+	int		size_ver;
 	
 }   t_cub;
 

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/15 12:40:08 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/15 13:33:42 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,22 @@
 
 //main.c
 
-int	check_ext(char *file, char *ext);
+int		check_ext(char *file, char *ext);
 
 //parsing
 
-int    check_ext(char *file, char *ext);
-int    ft_parsing(char **map, t_cub *cub);
-int    ft_transfer_map(t_cub *cub, char *tab);
+int		check_ext(char *file, char *ext);
+int		ft_parsing(char **map, t_cub *cub);
+int		ft_transfer_map(t_cub *cub, char *tab);
+
+// parsing map
+
+int		ft_check_border(t_cub *cub);
 
 // utils
 
 char	*get_next_line(int fd);
-int     ft_strlen_map(char *str);
+int		ft_strlen_map(char *str);
 
 //free
 
