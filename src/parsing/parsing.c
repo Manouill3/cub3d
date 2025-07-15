@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:34:08 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/15 13:31:51 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/15 17:50:27 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ int    ft_parsing(char **map, t_cub *cub)
         printf("%s\n", cub->map[i]);
         i++;
     }
-    if (ft_check_border(cub) == 1)
-        return (1);
+	printf("%d\n", flood_fill(cub, 2, 5, 0));
     return (0);
 }
