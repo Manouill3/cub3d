@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 12:31:44 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/16 07:55:01 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/16 11:14:49 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ int	strlen_line(char **map)
 	return (y);
 }
 
-int	flood_fill(t_cub *cub, int x, int y, int status) // status = 0;
+int	flood_fill(char **cub, int x, int y, int status) // status = 0;
 {
 	if (status == 1)
 		return (1);
-	if (x < 0 || y < 0 ||  (int)ft_strlen(cub->map->map[y]) <= x || strlen_line(cub->map->map) <= y)
+	if (x < 0 || y < 0 || (int)ft_strlen(cub[y]) <= x 
+		|| (int)strlen_line(cub) <= y)
 		return (1);
-	if (cub->map->map[y][x] != '0')
+	if (cub[y][x] != '0')
 		return (status);
-	cub->map->map[y][x] = 'o';
+	cub[y][x] = 'o';
 	status = flood_fill(cub, x + 1, y, status);
 	status = flood_fill(cub, x - 1, y, status);
 	status = flood_fill(cub, x, y + 1, status);
 	status = flood_fill(cub, x, y - 1, status);
 	return (status);
 }
-
