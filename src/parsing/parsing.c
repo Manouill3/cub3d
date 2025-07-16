@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:34:08 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/16 08:12:16 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/16 09:27:13 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,8 @@ static char	*ft_copytab(char **map)
 
 static int	 ft_map_tab(t_cub *cub, char *tab)
 {
-	printf("HERE\n");
 	cub->map->size_ver = 0;
 	cub->map->size_ver = ft_strlen_map(tab);
-	write(2, &cub->map->size_ver, 10);
-	printf("%d", cub->map->size_ver);
 	cub->map->map = ft_calloc(cub->map->size_ver + 1, sizeof(char *));
 	if (!cub->map->map)
 	{
@@ -120,6 +117,5 @@ int    ft_parsing(char **map, t_cub *cub)
     //     printf("%s\n", cub->map->map[i]);
     //     i++;
     // }
-	printf("%d\n", flood_fill(cub, 2, 5, 0));
     return (0);
 }

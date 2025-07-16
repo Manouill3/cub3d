@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:30:22 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/16 08:17:27 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/16 10:11:37 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int main(int ac, char **av)
 		}
 		cub3d(cub);
 		mlx_loop(cub->mlx);
+		ft_destroy(cub);
 		free_all(cub);
 	}
 	else 

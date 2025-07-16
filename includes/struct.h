@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/16 07:41:10 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/16 12:57:38 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ typedef struct s_win
 {
 	int	win_x;
 	int	win_y;
+	mlx_window	window;
 }	t_win;
 
 typedef struct s_player
 {
-	int	pos_x;
-	int	pos_y;
+	float	pos_x;
+	float	pos_y;
 }	t_player;
 
 typedef struct s_map
@@ -37,7 +38,6 @@ typedef struct s_cub
 	t_player    *player;
 	t_win		*win;
 	mlx_context	mlx;
-	mlx_window	window;
 }   t_cub;
 
 
