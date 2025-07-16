@@ -1,42 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/09 06:10:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/16 07:09:59 by mdegache         ###   ########.fr       */
+/*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
+/*   Updated: 2025/07/16 07:16:16 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "../includes/includes.h"
 
-typedef struct s_win
+void    cub3d(t_cub *cub)
 {
-	int	win_x;
-	int	win_y;
-}	t_win;
-
-typedef struct s_player
-{
-	int	pos_x;
-	int	pos_y;
-}	t_player;
-
-typedef struct s_map
-{
-	char    **map;
-	int		size_ver;
-}   t_map;
-
-typedef struct s_cub
-{
-	t_map       *map;
-	t_player    *player;
-	t_win		*win;
-}   t_cub;
-
-
-#endif
+    
+}

@@ -3,24 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:30:22 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/15 13:57:36 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/16 07:14:32 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
 
-t_cub  *ft_init(t_cub  *cub)
+int  *init_more(t_cub  *cub)
 {
-   	cub  = malloc(sizeof(t_cub));
+	cub->win = malloc(sizeof(t_win));
+	if (!cub->win)
+	{
+		free(cub->map);
+		free(cub->player);
+		free(cub);
+		return (1);
+	}
+	return (0);
+}
+
+int  *ft_init(t_cub  *cub)
+{
+   	cub = malloc(sizeof(t_cub));
     if (!cub)
-        return (NULL);
-    return (cub);
+        return (1);
+	cub->map = malloc(sizeof(t_map));
+	if (!cub->map)
+	{
+		free(cub);
+		return (1);
+	}
+	cub->player = malloc(sizeof(t_player));
+	if (!cub->player)
+	{
+		free(cub->map);
+		free(cub);
+		return (1);
+	}
+	if (init_more(cub))
+		return (1);
+    return (0);
 }    
-
-
 
 int main(int ac, char **av)
 {
@@ -34,10 +60,15 @@ int main(int ac, char **av)
 			write(2, "bad extension\n", 14);
 			return (1);
 		}
-		cub = ft_init(cub);
-		if (ft_parsing(av, cub) == 1)
+		if (ft_init(cub))
+			return (0);
+		if (ft_parsing(av, cub))
+		{
 			free_all(cub);
-		return (0);
+			return (1);
+		}
+		cub3d(cub);
+		free_all(cub);
 	}
 	else 
 		write(2, "too many or too few arguments\n", 30);
