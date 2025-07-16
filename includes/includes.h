@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/15 17:41:33 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/16 07:44:37 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,15 @@ int		ft_strlen_map(char *str);
 //free
 
 void	free_all(t_cub *cub);
+
+// window /Keybord
+
+void event_window(int event, void *param);
+void handle_key(int keycode, void *param);
+
+// cub3
+
+void    cub3d(t_cub *cub);
 
 
 #endif

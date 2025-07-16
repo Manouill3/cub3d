@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 17:33:11 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/16 07:14:51 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/16 07:43:33 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,18 @@ void    ft_free(char **str)
 		free(str);
 }
 
+void	ft_destroy(t_cub *cub)
+{
+	if (cub->mlx)
+	{
+    	mlx_destroy_window(cub->mlx, cub->window);
+		mlx_destroy_context(cub->mlx);
+	}
+}
+
 void	free_all(t_cub *cub)
 {
+	ft_destroy(cub);
 	if (cub->map && cub->map->map)
 		ft_free(cub->map->map);
 	if (cub->map)
@@ -38,4 +48,5 @@ void	free_all(t_cub *cub)
 		free(cub->win);
 	if (cub)
 		free(cub);
+	
 }

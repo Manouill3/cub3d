@@ -6,7 +6,7 @@
 #    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 06:04:01 by mdegache          #+#    #+#              #
-#    Updated: 2025/07/15 13:06:20 by tcybak           ###   ########.fr        #
+#    Updated: 2025/07/16 07:52:03 by tcybak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ LIBFT = includes/libft/libft.a includes/MacroLibX/libmlx.so
 
 SRC = 	src/main.c \
 		src/parsing/parsing.c \
+		src/window/Keybord.c \
+		src/cub3d.c \
 		src/parsing/parsing_map.c \
 		src/utils/get_next_line.c \
 		src/utils/utils_parsing.c \

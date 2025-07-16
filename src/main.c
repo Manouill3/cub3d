@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:30:22 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/16 07:14:32 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/16 07:43:48 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
 
-int  *init_more(t_cub  *cub)
+int  init_more(t_cub  *cub)
 {
 	cub->win = malloc(sizeof(t_win));
 	if (!cub->win)
@@ -25,11 +25,11 @@ int  *init_more(t_cub  *cub)
 	return (0);
 }
 
-int  *ft_init(t_cub  *cub)
+int  ft_init(t_cub  *cub)
 {
    	cub = malloc(sizeof(t_cub));
     if (!cub)
-        return (1);
+       return (1);
 	cub->map = malloc(sizeof(t_map));
 	if (!cub->map)
 	{
@@ -68,6 +68,7 @@ int main(int ac, char **av)
 			return (1);
 		}
 		cub3d(cub);
+		mlx_loop(cub->mlx);
 		free_all(cub);
 	}
 	else 
