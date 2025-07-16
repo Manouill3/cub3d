@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/16 07:44:37 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/16 08:18:07 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 //main.c
 
 int		check_ext(char *file, char *ext);
+int		ft_init(t_cub **cub);
 
 //parsing
 

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:30:22 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/16 07:43:48 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/16 08:17:27 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,28 @@ int  init_more(t_cub  *cub)
 	return (0);
 }
 
-int  ft_init(t_cub  *cub)
+int  ft_init(t_cub **cub)
 {
-   	cub = malloc(sizeof(t_cub));
-    if (!cub)
+       *cub = malloc(sizeof(t_cub));
+    if (!*cub)
        return (1);
-	cub->map = malloc(sizeof(t_map));
-	if (!cub->map)
-	{
-		free(cub);
-		return (1);
-	}
-	cub->player = malloc(sizeof(t_player));
-	if (!cub->player)
-	{
-		free(cub->map);
-		free(cub);
-		return (1);
-	}
-	if (init_more(cub))
-		return (1);
+    (*cub)->map = malloc(sizeof(t_map));
+    if (!(*cub)->map)
+    {
+        free(*cub);
+        return (1);
+    }
+    (*cub)->player = malloc(sizeof(t_player));
+    if (!(*cub)->player)
+    {
+        free((*cub)->map);
+        free(*cub);
+        return (1);
+    }
+    if (init_more(*cub))
+        return (1);
     return (0);
-}    
+}   
 
 int main(int ac, char **av)
 {
@@ -60,7 +60,7 @@ int main(int ac, char **av)
 			write(2, "bad extension\n", 14);
 			return (1);
 		}
-		if (ft_init(cub))
+		if (ft_init(&cub))
 			return (0);
 		if (ft_parsing(av, cub))
 		{

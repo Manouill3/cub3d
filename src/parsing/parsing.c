@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:34:08 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/16 07:02:49 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/16 08:12:16 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,13 @@ static char	*ft_copytab(char **map)
 
 static int	 ft_map_tab(t_cub *cub, char *tab)
 {
+	printf("HERE\n");
 	cub->map->size_ver = 0;
 	cub->map->size_ver = ft_strlen_map(tab);
-	cub->map = ft_calloc(cub->map->size_ver + 1, sizeof(char *));
-	if (!cub->map)
+	write(2, &cub->map->size_ver, 10);
+	printf("%d", cub->map->size_ver);
+	cub->map->map = ft_calloc(cub->map->size_ver + 1, sizeof(char *));
+	if (!cub->map->map)
 	{
 		free(tab);
 		return (1);
@@ -107,16 +110,16 @@ int	ft_transfer_map(t_cub *cub, char *tab)
 int    ft_parsing(char **map, t_cub *cub)
 {
     char    *tab;
-
+	
 	tab = ft_copytab(map);
-    if (ft_map_tab(cub, tab) == 1)
-        return (1);
-    int i = 0;
-    while (cub->map->map[i])
-    {
-        printf("%s\n", cub->map->map[i]);
-        i++;
-    }
+    if (ft_map_tab(cub, tab))
+		return (1);
+    // int i = 0;
+    // while (cub->map->map[i])
+    // {
+    //     printf("%s\n", cub->map->map[i]);
+    //     i++;
+    // }
 	printf("%d\n", flood_fill(cub, 2, 5, 0));
     return (0);
 }
