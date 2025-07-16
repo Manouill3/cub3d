@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/16 08:18:07 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/16 13:59:44 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,23 @@ int		ft_init(t_cub **cub);
 int		check_ext(char *file, char *ext);
 int		ft_parsing(char **map, t_cub *cub);
 int		ft_transfer_map(t_cub *cub, char *tab);
+int     ft_charac_accetable(char str, t_cub *cub, int x, int y);
 
 // parsing map
 
-int	flood_fill(t_cub *cub, int x, int y, int status);
+int	flood_fill(char **cub, int x, int y, int status);
 
 // utils
 
 char	*get_next_line(int fd);
 int		ft_strlen_map(char *str);
+char    **ft_strcopy(char **str, t_cub *cub);
+int     ft_error_charac(t_cub *cub);
 
 //free
 
 void	free_all(t_cub *cub);
+void    ft_free(char **str);
 
 // window /Keybord
 

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:30:22 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/16 08:17:27 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/16 10:38:18 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int  ft_init(t_cub **cub)
         free(*cub);
         return (1);
     }
+	(*cub)->map->map = NULL;
     (*cub)->player = malloc(sizeof(t_player));
     if (!(*cub)->player)
     {
@@ -67,8 +68,8 @@ int main(int ac, char **av)
 			free_all(cub);
 			return (1);
 		}
-		cub3d(cub);
-		mlx_loop(cub->mlx);
+		// cub3d(cub);
+		// mlx_loop(cub->mlx);
 		free_all(cub);
 	}
 	else 

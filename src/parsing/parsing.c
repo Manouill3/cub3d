@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:34:08 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/16 08:12:16 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/16 14:01:31 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,10 @@ static char	*ft_copytab(char **map)
 
 static int	 ft_map_tab(t_cub *cub, char *tab)
 {
-	printf("HERE\n");
+	if (!tab)
+		return (1);
 	cub->map->size_ver = 0;
 	cub->map->size_ver = ft_strlen_map(tab);
-	write(2, &cub->map->size_ver, 10);
-	printf("%d", cub->map->size_ver);
 	cub->map->map = ft_calloc(cub->map->size_ver + 1, sizeof(char *));
 	if (!cub->map->map)
 	{
@@ -107,19 +106,68 @@ int	ft_transfer_map(t_cub *cub, char *tab)
 	return (0);
 }
 
-int    ft_parsing(char **map, t_cub *cub)
+
+int	verif_character_map(char **map_tmp, t_cub *cub)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	cub->map->nb_player = 0;
+	while (map_tmp[y])
+	{
+		x = 0;
+		while (map_tmp[y][x])
+		{
+			// printf("x = %d, y = %d map = %c\n", x, y, map_tmp[y][x]);
+			if (ft_charac_accetable(map_tmp[y][x], cub, x, y) == 1)
+			{
+				write (2, "Error the characters to create the map are not compliant\n",57);
+				return (1);
+			}
+			x++;
+		}
+		y++;
+	}
+	if (ft_error_charac(cub) == 1)
+		return (1);
+	return (0);
+}
+
+int   ft_parsing(char **map, t_cub *cub)
 {
     char    *tab;
+	char	**map_tmp;
 	
 	tab = ft_copytab(map);
     if (ft_map_tab(cub, tab))
 		return (1);
-    // int i = 0;
-    // while (cub->map->map[i])
-    // {
-    //     printf("%s\n", cub->map->map[i]);
-    //     i++;
-    // }
-	printf("%d\n", flood_fill(cub, 2, 5, 0));
+	map_tmp = ft_strcopy(cub->map->map, cub);
+	if (!map_tmp)
+		return (1);
+	if (verif_character_map(map_tmp, cub) == 1)
+	{
+		ft_free(map_tmp);
+		return (1);
+	}
+	if (flood_fill(map_tmp, 2, 1, 0) == 1)
+	{
+		ft_free(map_tmp);
+		write (2, "Error map not good\n",19);
+		return (1);
+	}
+    int i = 0;
+    while (map_tmp[i])
+    {
+        printf("map_tmp = %s\n", map_tmp[i]);
+        i++;
+    }
+	i = 0;
+    while (cub->map->map[i])
+    {
+        printf("map = %s\n", cub->map->map[i]);
+        i++;
+    }
+	ft_free(map_tmp);
     return (0);
 }
