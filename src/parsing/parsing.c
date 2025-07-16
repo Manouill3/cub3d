@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:34:08 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/15 17:50:27 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/16 07:02:49 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static char	*ft_copytab(char **map)
 
 static int	 ft_map_tab(t_cub *cub, char *tab)
 {
-	cub->size_ver = 0;
-	cub->size_ver = ft_strlen_map(tab);
-	cub->map = ft_calloc(cub->size_ver + 1, sizeof(char *));
+	cub->map->size_ver = 0;
+	cub->map->size_ver = ft_strlen_map(tab);
+	cub->map = ft_calloc(cub->map->size_ver + 1, sizeof(char *));
 	if (!cub->map)
 	{
 		free(tab);
@@ -91,11 +91,11 @@ int	ft_transfer_map(t_cub *cub, char *tab)
 		line_size = 0;
 		while (tab[i + line_size] && tab[i + line_size] != '\n')
         	line_size++;
-		cub->map[j] = ft_calloc(line_size + 1, sizeof(char));
-		if (!cub->map[j])
+		cub->map->map[j] = ft_calloc(line_size + 1, sizeof(char));
+		if (!cub->map->map[j])
 			return (1);
 		while (tab[i] && tab[i] != '\n')
-			cub->map[j][z++] = tab[i++];
+			cub->map->map[j][z++] = tab[i++];
         if (tab[i] == '\n')
             i++;
 		j++;
@@ -112,9 +112,9 @@ int    ft_parsing(char **map, t_cub *cub)
     if (ft_map_tab(cub, tab) == 1)
         return (1);
     int i = 0;
-    while (cub->map[i])
+    while (cub->map->map[i])
     {
-        printf("%s\n", cub->map[i]);
+        printf("%s\n", cub->map->map[i]);
         i++;
     }
 	printf("%d\n", flood_fill(cub, 2, 5, 0));

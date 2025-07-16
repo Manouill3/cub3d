@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 17:33:11 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/15 12:33:46 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/16 07:14:51 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,14 @@ void    ft_free(char **str)
 
 void	free_all(t_cub *cub)
 {
+	if (cub->map && cub->map->map)
+		ft_free(cub->map->map);
 	if (cub->map)
-		ft_free(cub->map);
+		free(cub->map);
+	if (cub->player)
+		free(cub->player);
+	if (cub->win)
+		free(cub->win);
 	if (cub)
 		free(cub);
 }
