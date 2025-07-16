@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/15 13:33:42 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/15 17:41:33 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		ft_transfer_map(t_cub *cub, char *tab);
 
 // parsing map
 
-int		ft_check_border(t_cub *cub);
+int	flood_fill(t_cub *cub, int x, int y, int status);
 
 // utils
 

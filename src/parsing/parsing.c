@@ -117,7 +117,6 @@ int    ft_parsing(char **map, t_cub *cub)
         printf("%s\n", cub->map->map[i]);
         i++;
     }
-    if (ft_check_border(cub) == 1)
-        return (1);
+	printf("%d\n", flood_fill(cub, 2, 5, 0));
     return (0);
 }
