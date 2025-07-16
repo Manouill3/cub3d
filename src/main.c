@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:30:22 by mdegache          #+#    #+#             */
 /*   Updated: 2025/07/16 10:38:18 by tcybak           ###   ########.fr       */
@@ -68,8 +68,9 @@ int main(int ac, char **av)
 			free_all(cub);
 			return (1);
 		}
-		// cub3d(cub);
-		// mlx_loop(cub->mlx);
+		cub3d(cub);
+		mlx_loop(cub->mlx);
+		ft_destroy(cub);
 		free_all(cub);
 	}
 	else 

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:33 by mdegache          #+#    #+#             */
 /*   Updated: 2025/07/16 13:59:44 by tcybak           ###   ########.fr       */
@@ -21,13 +21,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <math.h>
 #include "libft/libft.h"
 #include "MacroLibX/includes/mlx.h"
 #include "MacroLibX/includes/mlx_extended.h"
 #include "MacroLibX/includes/mlx_profile.h"
 #include "struct.h"
-
-
 
 //main.c
 
@@ -54,6 +53,7 @@ int     ft_error_charac(t_cub *cub);
 
 //free
 
+void	ft_destroy(t_cub *cub);
 void	free_all(t_cub *cub);
 void    ft_free(char **str);
 
