@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:13:54 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/17 10:40:40 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/17 10:52:04 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    move_left(int keycode, void *param)
     cub = (t_cub *)param;
     printf("%d\n", keycode);
     if (keycode == 7)
-        
+        cub->player->pos_x += 0.1;
 }
 
 void    events(t_cub *cub)
