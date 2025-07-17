@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/17 15:05:04 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/17 17:01:57 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
 
-void    ft_draw_line(t_cub *cub)
-{
+// void    ft_draw_line(t_cub *cub)
+// {
      
-}
+// }
 
 void    ft_draw_player(t_cub *cub)
 {
@@ -93,7 +93,8 @@ void    init_win(t_cub *cub)
     info.height = 720;
     cub->win->window = mlx_new_window(cub->mlx, &info);
     ft_draw_map(cub);
-    ft_draw_line(cub);
+    events(cub);
+    // ft_draw_line(cub);
 }
 
 void    cub3d(t_cub *cub)

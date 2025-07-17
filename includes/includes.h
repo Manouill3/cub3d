@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/17 13:46:39 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/17 17:03:11 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ void        ft_draw_player(t_cub *cub);
 
 //events
 
+void        move_down(int keycode, void *param);
+void        move_up(int keycode, void *param);
+void        move_right(int keycode, void *param);
+void        move_left(int keycode, void *param);
 void        events(t_cub *cub);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:35:52 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/17 13:01:00 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/17 17:04:11 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,12 @@ void handle_key(int keycode, void *param)
         free_all(cub);
         exit(0);
     }
-    // mlx_clear_window(cub->mlx,cub->win->window, color(0x00FF00FF));
-    // ft_draw_pixel(cub);
+    move_down(keycode, param);
+    move_left(keycode, param);
+    move_right(keycode, param);
+    move_up(keycode, param);
+    mlx_clear_window(cub->mlx, cub->win->window, color(0x000000FF));
+    ft_draw_map(cub);
+    ft_draw_player(cub);
     return ;
 }

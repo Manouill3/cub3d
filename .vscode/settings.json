@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "libft.h": "c",
-        "mlx_profile.h": "c"
+        "mlx_profile.h": "c",
+        "includes.h": "c"
     }
 }
