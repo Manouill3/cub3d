@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/16 13:59:44 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/17 10:35:16 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,12 @@ void    ft_free(char **str);
 void event_window(int event, void *param);
 void handle_key(int keycode, void *param);
 
-// cub3
+// cub3d
 
 void    cub3d(t_cub *cub);
 
+//events
+
+void    events(t_cub *cub);
 
 #endif
