@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
+#    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 06:04:01 by mdegache          #+#    #+#              #
-#    Updated: 2025/07/17 10:38:20 by mdegache         ###   ########.fr        #
+#    Updated: 2025/07/17 12:39:41 by tcybak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC = 	src/main.c\
 		src/parsing/parsing_map.c\
 		src/utils/get_next_line.c\
 		src/utils/utils_parsing.c\
+		src/utils/color.c\
 		src/free/ft_free.c
 
 OBJ_DIR = build

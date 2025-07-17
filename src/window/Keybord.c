@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Keybord.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:35:52 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/16 10:09:48 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/17 13:01:00 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void event_window(int event, void *param)
 void handle_key(int keycode, void *param)
 {
     t_cub *cub;
-    
+
     cub = (t_cub *)param;
     if (keycode == 41)
     {
@@ -36,4 +36,7 @@ void handle_key(int keycode, void *param)
         free_all(cub);
         exit(0);
     }
+    // mlx_clear_window(cub->mlx,cub->win->window, color(0x00FF00FF));
+    // ft_draw_pixel(cub);
+    return ;
 }
