@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/16 12:43:53 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/17 09:06:35 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 typedef struct s_win
 {
-	int	win_x;
-	int	win_y;
 	mlx_window	window;
 }	t_win;
 

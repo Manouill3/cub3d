@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:34:08 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/16 14:01:31 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/17 09:12:00 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,12 +157,6 @@ int   ft_parsing(char **map, t_cub *cub)
 		return (1);
 	}
     int i = 0;
-    while (map_tmp[i])
-    {
-        printf("map_tmp = %s\n", map_tmp[i]);
-        i++;
-    }
-	i = 0;
     while (cub->map->map[i])
     {
         printf("map = %s\n", cub->map->map[i]);
