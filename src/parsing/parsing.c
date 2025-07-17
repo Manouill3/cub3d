@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:34:08 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/17 09:12:00 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/17 10:48:48 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,18 +150,25 @@ int   ft_parsing(char **map, t_cub *cub)
 		ft_free(map_tmp);
 		return (1);
 	}
-	if (flood_fill(map_tmp, 2, 1, 0) == 1)
+	printf("x = %f, y = %f",  cub->player->pos_x,  cub->player->pos_y);
+	if (flood_fill(map_tmp, cub->player->pos_x, cub->player->pos_y, 0) == 1)
 	{
 		ft_free(map_tmp);
 		write (2, "Error map not good\n",19);
 		return (1);
 	}
-    int i = 0;
-    while (cub->map->map[i])
-    {
-        printf("map = %s\n", cub->map->map[i]);
-        i++;
-    }
+    // int i = 0;
+    // while (map_tmp[i])
+    // {
+    //     printf("map 22= %s\n", map_tmp[i]);
+    //     i++;
+    // }
+	// i = 0;
+    // while (cub->map->map[i])
+    // {
+    //     printf("map 11= %s\n", cub->map->map[i]);
+    //     i++;
+    // }
 	ft_free(map_tmp);
     return (0);
 }
