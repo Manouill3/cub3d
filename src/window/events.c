@@ -1,45 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/09 06:10:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/17 10:09:49 by mdegache         ###   ########.fr       */
+/*   Created: 2025/07/17 10:13:54 by mdegache          #+#    #+#             */
+/*   Updated: 2025/07/17 10:40:40 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "../../includes/includes.h"
 
-typedef struct s_win
+void    move_left(int keycode, void *param)
 {
-	mlx_window	window;
-}	t_win;
+    t_cub   *cub;
 
-typedef struct s_player
+    cub = (t_cub *)param;
+    printf("%d\n", keycode);
+    if (keycode == 7)
+        
+}
+
+void    events(t_cub *cub)
 {
-	float	pos_x;
-	float	pos_y;
-	float	start_x;
-	float	start_y;
-}	t_player;
-
-typedef struct s_map
-{
-	char    **map;
-	int		size_ver;
-	int		nb_player;
-}   t_map;
-
-typedef struct s_cub
-{
-	t_map       *map;
-	t_player    *player;
-	t_win		*win;
-	mlx_context	mlx;
-}   t_cub;
-
-
-#endif
+    mlx_on_event(cub->mlx, cub->win->window, 0, move_left, (void *)cub);
+}

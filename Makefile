@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
+#    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 06:04:01 by mdegache          #+#    #+#              #
-#    Updated: 2025/07/16 07:52:03 by tcybak           ###   ########.fr        #
+#    Updated: 2025/07/17 10:38:20 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,14 @@ LDFLAGS = -lSDL2
 LIB = includes/libft
 LIBFT = includes/libft/libft.a includes/MacroLibX/libmlx.so
 
-SRC = 	src/main.c \
-		src/parsing/parsing.c \
-		src/window/Keybord.c \
-		src/cub3d.c \
-		src/parsing/parsing_map.c \
-		src/utils/get_next_line.c \
-		src/utils/utils_parsing.c \
+SRC = 	src/main.c\
+		src/parsing/parsing.c\
+		src/window/Keybord.c\
+		src/window/events.c\
+		src/cub3d.c\
+		src/parsing/parsing_map.c\
+		src/utils/get_next_line.c\
+		src/utils/utils_parsing.c\
 		src/free/ft_free.c
 
 OBJ_DIR = build
