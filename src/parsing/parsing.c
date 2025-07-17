@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:34:08 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/17 10:48:48 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/17 14:02:35 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ int   ft_parsing(char **map, t_cub *cub)
 		ft_free(map_tmp);
 		return (1);
 	}
-	printf("x = %f, y = %f",  cub->player->pos_x,  cub->player->pos_y);
 	if (flood_fill(map_tmp, cub->player->pos_x, cub->player->pos_y, 0) == 1)
 	{
 		ft_free(map_tmp);

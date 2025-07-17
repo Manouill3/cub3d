@@ -3,16 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/17 12:41:22 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/17 14:10:53 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
 
-void    ft_draw_pixel(t_cub *cub)
+void    ft_draw_player(t_cub *cub)
+{
+    int win_x;
+    int win_y;
+    
+    win_y = 0;
+    while (win_y < 32)
+    {
+        win_x = 0;
+        while (win_x < 32)
+        {
+            mlx_pixel_put(cub->mlx, cub->win->window, win_x + cub->player->pos_x * 32, win_y + cub->player->pos_y * 32, color(0x000000FF));
+            win_x++;
+        }
+        win_y++;
+    }
+}
+
+void    ft_draw_map(t_cub *cub)
 {
     int win_x;
     int win_y;
@@ -39,7 +57,7 @@ void    ft_draw_pixel(t_cub *cub)
                     win_y++;
                 }
             }
-            if (cub->map->map[y][x] == '0')
+            if (cub->map->map[y][x] == '0' || cub->map->map[y][x] == 'N' || cub->map->map[y][x] == 'S' || cub->map->map[y][x] == 'E' || cub->map->map[y][x] == 'W')
             {
                 win_y = 0;
                 while (win_y < 32)
@@ -48,20 +66,6 @@ void    ft_draw_pixel(t_cub *cub)
                     while (win_x < 32)
                     {
                         mlx_pixel_put(cub->mlx, cub->win->window, win_x + x * 32, win_y + y * 32, color(0x00FF00FF));
-                        win_x++;
-                    }
-                    win_y++;
-                }
-            }
-            if (cub->map->map[y][x] == 'W')
-            {
-                win_y = 0;
-                while (win_y < 32)
-                {
-                    win_x = 0;
-                    while (win_x < 32)
-                    {
-                        mlx_pixel_put(cub->mlx, cub->win->window, win_x + x * 32, win_y + y * 32, color(0xFFFF00FF));
                         win_x++;
                     }
                     win_y++;
@@ -83,8 +87,8 @@ void    init_win(t_cub *cub)
     info.width = 1280;
     info.height = 720;
     cub->win->window = mlx_new_window(cub->mlx, &info);
-
-    ft_draw_pixel(cub);
+    ft_draw_map(cub);
+    ft_draw_player(cub);
     mlx_on_event(cub->mlx, cub->win->window, MLX_KEYDOWN, handle_key, (void *)cub);
     mlx_on_event(cub->mlx, cub->win->window, MLX_WINDOW_EVENT, event_window, (void *)cub);
 }

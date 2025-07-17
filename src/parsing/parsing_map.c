@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 12:31:44 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/17 10:47:07 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/17 14:05:20 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	strlen_line(char **map)
 	return (y);
 }
 
-int	flood_fill(char **cub, int x, int y, int status) // status = 0;
+int	flood_fill(char **cub, int x, int y, int status)
 {
 	if (status == 1)
 		return (1);
