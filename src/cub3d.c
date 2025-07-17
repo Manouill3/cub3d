@@ -6,11 +6,16 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/17 14:10:53 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/17 15:05:04 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
+
+void    ft_draw_line(t_cub *cub)
+{
+     
+}
 
 void    ft_draw_player(t_cub *cub)
 {
@@ -88,9 +93,7 @@ void    init_win(t_cub *cub)
     info.height = 720;
     cub->win->window = mlx_new_window(cub->mlx, &info);
     ft_draw_map(cub);
-    ft_draw_player(cub);
-    mlx_on_event(cub->mlx, cub->win->window, MLX_KEYDOWN, handle_key, (void *)cub);
-    mlx_on_event(cub->mlx, cub->win->window, MLX_WINDOW_EVENT, event_window, (void *)cub);
+    ft_draw_line(cub);
 }
 
 void    cub3d(t_cub *cub)
