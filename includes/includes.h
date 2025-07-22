@@ -6,15 +6,19 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/22 07:38:19 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/22 13:34:42 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INCLUDES_H
 # define INCLUDES_H
 
-# ifndef BUFFER_SIZE
-#   define BUFFER_SIZE 42
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 42
+#endif
+
+#ifndef FOV
+# define FOV 110
 #endif
 
 #include <stdio.h>

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/22 10:52:08 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/22 13:00:56 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_player
 	int		arrow_left;
 	int		arrow_right;
 	int		angle;
+	int		fov;
 }	t_player;
 
 typedef struct s_map

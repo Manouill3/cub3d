@@ -6,13 +6,13 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/22 10:55:19 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/22 14:40:14 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
 
-void    create_rect(t_cub *cub, int x, int y, int h, mlx_color color)
+void    create_rect(t_cub *cub, int x, int y, int w, int h, mlx_color color)
 {
     int i;
     int j;
@@ -22,15 +22,18 @@ void    create_rect(t_cub *cub, int x, int y, int h, mlx_color color)
     while (i < h)
     {
         j = 0;
-        mlx_pixel_put(cub->mlx, cub->win->window, x + j, y + i, color);
+        while (j < w)
+        {
+            mlx_pixel_put(cub->mlx, cub->win->window, x + j, y + i, color);
+            j++;
+        }
         i++;
     }
-    
-    
 }
 
 void    ft_draw_line(t_cub *cub)
 {
+    int     i;
     int     map_x;
     int     map_y;
     int     step_x;
@@ -42,47 +45,52 @@ void    ft_draw_line(t_cub *cub)
     float   lenght_x;
     float   lenght_y;
 
+    i = 0;
     map_x = (int)cub->player->pos_x;
     map_y = (int)cub->player->pos_y;
-    cos_x = cos(cub->player->angle * (3.14 / 180.0));
-    sin_y = sin(cub->player->angle * (3.14 / 180.0));
-    ray_x = sqrt(1 + (sin_y / cos_x) * (sin_y / cos_x));
-    ray_y = sqrt(1 + (cos_x / sin_y) * (cos_x / sin_y));
-    if (cos_x > 0)
+    while (i < FOV)
     {
-        step_x = 1;
-        lenght_x = (1 - (cub->player->pos_x - (float)map_x)) * ray_x;
-    }
-    else
-    {
-        step_x = -1;
-        lenght_x = (cub->player->pos_x - (float)map_x) * ray_x;
-    }
-    if (sin_y > 0)
-    {
-        step_y = 1;
-        lenght_y = (1 - (cub->player->pos_y - (float)map_y)) * ray_y;
-    }
-    else
-    {
-        step_y = -1;
-        lenght_y = (cub->player->pos_y - (float)map_y) * ray_y;
-    }
-    while (1)
-    {
-        if (cub->map->map[map_y][map_x] == '1')
-            break;
-        create_rect(cub, map_x * 32, map_y * 32, 32, color(0xFF0000FF));
-        if (lenght_x > lenght_y)
+        cos_x = cos((cub->player->angle + i) % 360 * (3.14 / 180.0));
+        sin_y = sin((cub->player->angle + i) % 360 * (3.14 / 180.0));
+        ray_x = sqrt(1 + (sin_y / cos_x) * (sin_y / cos_x));
+        ray_y = sqrt(1 + (cos_x / sin_y) * (cos_x / sin_y));
+        if (cos_x > 0)
         {
-            map_y += step_y;
-            lenght_y += ray_y;
+            step_x = 1;
+            lenght_x = (1 - (cub->player->pos_x - (float)map_x)) * ray_x;
         }
         else
         {
-            map_x += step_x;
-            lenght_x += ray_x;
+            step_x = -1;
+            lenght_x = (cub->player->pos_x - (float)map_x) * ray_x;
         }
+        if (sin_y > 0)
+        {
+            step_y = 1;
+            lenght_y = (1 - (cub->player->pos_y - (float)map_y)) * ray_y;
+        }
+        else
+        {
+            step_y = -1;
+            lenght_y = (cub->player->pos_y - (float)map_y) * ray_y;
+        }
+        while (1)
+        {
+            if (cub->map->map[map_y][map_x] == '1')
+                break;
+            create_rect(cub, map_x * 32, map_y * 32, 32, 32, color(0xFF0000FF));
+            if (lenght_x > lenght_y)
+            {
+                map_y += step_y;
+                lenght_y += ray_y;
+            }
+            else
+            {
+                map_x += step_x;
+                lenght_x += ray_x;
+            }
+        }
+        i++;
     }
     if (cub->player->arrow_left == 1)
         cub->player->angle += 1 % 360;
@@ -165,8 +173,8 @@ void    init_win(t_cub *cub)
     info.height = 720;
     cub->win->window = mlx_new_window(cub->mlx, &info);
     ft_draw_map(cub);
-    ft_draw_player(cub);
     ft_draw_line(cub);
+    ft_draw_player(cub);
     events(cub);
 }
 

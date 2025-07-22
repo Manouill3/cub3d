@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:13:54 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/22 10:52:25 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/22 13:35:01 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void    events(t_cub *cub)
 {
     cub->player->arrow_left = 0;
     cub->player->arrow_right = 0;
-    cub->player->angle = 0;
+    cub->player->angle = (180 - FOV) / 2;
     mlx_on_event(cub->mlx, cub->win->window, MLX_KEYDOWN, handle_key, (void *)cub);
     mlx_on_event(cub->mlx, cub->win->window, MLX_KEYUP, handle_key_up, (void *)cub);
     mlx_on_event(cub->mlx, cub->win->window, MLX_WINDOW_EVENT, event_window, (void *)cub);
