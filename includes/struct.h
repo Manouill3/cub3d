@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/22 13:00:56 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/22 20:46:57 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_player
 	float	pos_y;
 	float	ray_x;
 	float	ray_y;
+	float 	pos_end_x;
+	float 	pos_end_y;
 	int		arrow_left;
 	int		arrow_right;
 	int		angle;
