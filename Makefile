@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
+#    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 06:04:01 by mdegache          #+#    #+#              #
-#    Updated: 2025/07/17 12:39:41 by tcybak           ###   ########.fr        #
+#    Updated: 2025/07/22 06:34:34 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ NAME = cub3d
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 LDFLAGS = -lSDL2
+LMFLAGS = -lm
 
 LIB = includes/libft
 LIBFT = includes/libft/libft.a includes/MacroLibX/libmlx.so
@@ -41,7 +42,7 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(SRC) $(LIBFT) $(CFLAGS) $(LDFLAGS) -o $(NAME)
+	@$(CC) $(SRC) $(LIBFT) $(CFLAGS) $(LDFLAGS) $(LMFLAGS) -o $(NAME)
 	@echo "$(GREEN)SUCCESS$(RESET)"
 
 $(LIBFT):

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Keybord.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:35:52 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/17 17:07:44 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/22 12:57:57 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,14 @@ void handle_key(int keycode, void *param)
         free_all(cub);
         exit(0);
     }
+    if (keycode == 79)
+        cub->player->arrow_right = 1;   
+    if (keycode == 80)
+        cub->player->arrow_left = 1;   
     move(keycode, param);
     mlx_clear_window(cub->mlx, cub->win->window, color(0x000000FF));
     ft_draw_map(cub);
     ft_draw_player(cub);
+    ft_draw_line(cub);
     return ;
 }
