@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/22 22:27:12 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/23 10:27:58 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ft_draw_line_view(t_cub *cub, float x1, float y1, mlx_color color)
     {
         x = (x1 + i * x_inc);
         y = (y1 + i * y_inc);
+		
         if (x >= 0 && x < 1280 && y >= 0 && y < 720)
             mlx_pixel_put(cub->mlx, cub->win->window, x, y, color);
         i++;
@@ -113,6 +114,7 @@ void    ft_draw_line(t_cub *cub)
 		{
 			if (cub->map->map[map_y][map_x] == '1')
 				break;
+			create_rect(cub, map_x * 32, map_y * 32, 32, 32, color(0xFF0000FF));
 			if (lenght_x > lenght_y)
 			{
 				map_y += step_y;
@@ -124,9 +126,9 @@ void    ft_draw_line(t_cub *cub)
 				lenght_x += ray_x;
 			}
 		}
-		cub->player->pos_end_x = map_x * 32 + 16;
-        cub->player->pos_end_y = map_y * 32 + 16;
-		ft_draw_line_view(cub, player_cent_x, player_cent_y, color(0xFF0000FF));
+		cub->player->pos_end_x = map_x * 32;
+        cub->player->pos_end_y = map_y * 32;
+		// ft_draw_line_view(cub, player_cent_x, player_cent_y, color(0xFF0000FF));
 		i++;
 	}
 	if (cub->player->arrow_left == 1)
