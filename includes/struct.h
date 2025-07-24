@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/22 20:46:57 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/24 14:56:55 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+#define PI 3.14159265
+#define WIDTH 1280
+#define HEIGHT 720
 
 typedef struct s_win
 {
@@ -22,16 +26,17 @@ typedef struct s_win
 
 typedef struct s_player
 {
+	// float	ray_x;
+	// float	ray_y;
+	// float 	pos_end_x;
+	// float 	pos_end_y;
 	float	pos_x;
 	float	pos_y;
-	float	ray_x;
-	float	ray_y;
-	float 	pos_end_x;
-	float 	pos_end_y;
+	int		stepx;
+	int		stepy;
+	int		angle;
 	int		arrow_left;
 	int		arrow_right;
-	int		angle;
-	int		fov;
 }	t_player;
 
 typedef struct s_map

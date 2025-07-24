@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/22 22:25:53 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/24 10:15:01 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void        handle_key(int keycode, void *param);
 void        cub3d(t_cub *cub);
 void        ft_draw_map(t_cub *cub);
 void        ft_draw_player(t_cub *cub);
-void        ft_draw_line(t_cub *cub);
+void        draw_ray(t_cub *cub);
+// void        ft_draw_line(t_cub *cub);
 
 //events
 

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/23 10:27:58 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/24 14:58:31 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,110 +31,69 @@ void    create_rect(t_cub *cub, int x, int y, int w, int h, mlx_color color)
 	}
 }
 
-void	ft_draw_line_view(t_cub *cub, float x1, float y1, mlx_color color)
+void	draw_ray(t_cub *cub)
 {
-	int 	x;
-	int 	y;
-	int 	i;
-	float	x2;
-	float	y2;
-    float 	dx;
-    float 	dy;
-    int 	steps;
-    float 	x_inc;
-    float 	y_inc;
+	int	i;
+	float	cosx;
+	float	siny;
+	int	ray_x;
+	int	ray_y;
+	float	delx;
+	float	dely;
+	float	distx;
+	float	disty;
 
-	x2 = cub->player->pos_end_x;
-	y2 = cub->player->pos_end_y;
-	dx = x2 - x1;
-	dy = y2 - y1;
-	steps = (fmax(fabs(dx), fabs(dy)));
-	y_inc = dy / steps;
-	x_inc = dx / steps;
-    i = 0;
-    while (i <= steps)
-    {
-        x = (x1 + i * x_inc);
-        y = (y1 + i * y_inc);
-		
-        if (x >= 0 && x < 1280 && y >= 0 && y < 720)
-            mlx_pixel_put(cub->mlx, cub->win->window, x, y, color);
-        i++;
-    }
-}
-
-void    ft_draw_line(t_cub *cub)
-{
-	int     i;
-	int     map_x;
-	int     map_y;
-	int     step_x;
-	int     step_y;
-	float   cos_x;
-	float   sin_y;
-	float   ray_x;
-	float   ray_y;
-	float   lenght_x;
-	float   lenght_y;
-	float   player_cent_x;
-    float   player_cent_y;
-
+	if (cub->player->arrow_left)
+		cub->player->angle -= 1;
+	if (cub->player->arrow_right)
+		cub->player->angle += 1;
 	i = 0;
-	player_cent_x = cub->player->pos_x * 32 + 16;
-	player_cent_y = cub->player->pos_y * 32 + 16;
 	while (i < FOV)
 	{
-		cos_x = cos((cub->player->angle + i) % 360 * (3.14 / 180.0));
-		sin_y = sin((cub->player->angle + i) % 360 * (3.14 / 180.0));
-		ray_x = sqrt(1 + (sin_y / cos_x) * (sin_y / cos_x));
-		ray_y = sqrt(1 + (cos_x / sin_y) * (cos_x / sin_y));
-		map_x = (int)cub->player->pos_x;
-        map_y = (int)cub->player->pos_y;
-		if (cos_x > 0)
+		cosx = cos(((cub->player->angle % 360) + i) * (PI / 180));
+		siny = sin(((cub->player->angle % 360) + i) * (PI / 180));
+		delx = sqrt(1 + (siny / cosx) * (siny / cosx));
+		dely = sqrt(1 + (cosx / siny) * (cosx / siny));
+		ray_x = (int)cub->player->pos_x;
+		ray_y = (int)cub->player->pos_y;
+		if (cosx > 0)
 		{
-			step_x = 1;
-			lenght_x = (1 - (cub->player->pos_x - (float)map_x)) * ray_x;
+			cub->player->stepx = 1;
+			distx = (1 - (cub->player->pos_x - (float)ray_x)) * delx;
 		}
 		else
 		{
-			step_x = -1;
-			lenght_x = (cub->player->pos_x - (float)map_x) * ray_x;
+			cub->player->stepx = -1;
+			distx = (cub->player->pos_x - (float)ray_x) * delx;
 		}
-		if (sin_y > 0)
+		if (siny > 0)
 		{
-			step_y = 1;
-			lenght_y = (1 - (cub->player->pos_y - (float)map_y)) * ray_y;
+			cub->player->stepy = 1;
+			disty = (1 - (cub->player->pos_y - (float)ray_y)) * dely;
 		}
 		else
 		{
-			step_y = -1;
-			lenght_y = (cub->player->pos_y - (float)map_y) * ray_y;
+			cub->player->stepy = -1;
+			disty = (cub->player->pos_y - (float)ray_y) * dely;
 		}
 		while (1)
 		{
-			if (cub->map->map[map_y][map_x] == '1')
+			if (cub->map->map[ray_y][ray_x] == '1')
 				break;
-			create_rect(cub, map_x * 32, map_y * 32, 32, 32, color(0xFF0000FF));
-			if (lenght_x > lenght_y)
+			create_rect(cub, ray_x * 32, ray_y * 32, 32, 32, color(0xFF0000FF));
+			if (distx > disty)
 			{
-				map_y += step_y;
-				lenght_y += ray_y;
+				ray_y += cub->player->stepy;
+				disty += dely;
 			}
 			else
 			{
-				map_x += step_x;
-				lenght_x += ray_x;
+				ray_x += cub->player->stepx;
+				distx += delx;
 			}
 		}
-		cub->player->pos_end_x = map_x * 32;
-        cub->player->pos_end_y = map_y * 32;
-		// ft_draw_line_view(cub, player_cent_x, player_cent_y, color(0xFF0000FF));
-		i++;
+		i++;	
 	}
-	if (cub->player->arrow_left == 1)
-		cub->player->angle += 1 % 360;
-	if (cub->player->arrow_right == 1)
-		cub->player->angle -= 1 % 360;
 }
 
 void    ft_draw_player(t_cub *cub)
@@ -148,7 +107,7 @@ void    ft_draw_player(t_cub *cub)
 		win_x = 0;
 		while (win_x < 32)
 		{
-			mlx_pixel_put(cub->mlx, cub->win->window, win_x + cub->player->pos_x * 32, win_y + cub->player->pos_y * 32, color(0x000000FF));
+			mlx_pixel_put(cub->mlx, cub->win->window, win_x + cub->player->pos_x * 32, win_y + cub->player->pos_y * 32, color(0x0000FFFF));
 			win_x++;
 		}
 		win_y++;
@@ -202,18 +161,64 @@ void    ft_draw_map(t_cub *cub)
 	}
 }
 
+void	raycast(t_cub *cub)
+{
+	int		i;
+	int		ray_x;
+	int		ray_y;
+	float	cosx;
+	float	siny;
+	float	delx;
+	float	dely;
+	float	distx;
+	float	disty;
+	float	diff;
+
+	i = 0;
+	while (i < WIDTH)
+	{	
+		ray_x = (int)cub->player->pos_x;
+		ray_y = (int)cub->player->pos_y;
+		cosx = cos((cub->player->angle % 360) * (PI / 180.0));
+		siny = sin((cub->player->angle % 360) * (PI / 180.0));
+		delx = sqrt(1 + (siny * siny) / (cosx * cosx));
+		dely = sqrt(1 + (cosx * cosx) / (siny * siny));
+		if (cosx > 0)
+		{
+			cub->player->stepx = 1;
+			distx = (1 - (cub->player->pos_x - (float)ray_x)) * delx;
+		}
+		else
+		{
+			cub->player->stepx = -1;
+			distx = (cub->player->pos_x - (float)ray_x) * delx;
+		}
+		if (siny > 0)
+		{
+			cub->player->stepy = 1;
+			disty = (1 - (cub->player->pos_y - (float)ray_y)) * dely;
+		}
+		else
+		{
+			cub->player->stepy = -1;
+			disty = (cub->player->pos_y - (float)ray_y) * dely;
+		}
+	}
+}
+
 void    init_win(t_cub *cub)
 {
 	mlx_window_create_info info;
 	
 	ft_memset(&info, 0, sizeof(info));
 	info.title = "Cub3D";
-	info.width = 1280;
-	info.height = 720;
+	info.width = WIDTH;
+	info.height = HEIGHT;
 	cub->win->window = mlx_new_window(cub->mlx, &info);
-	ft_draw_map(cub);
-	ft_draw_line(cub);
-	ft_draw_player(cub);
+	cub->player->angle = (180 - FOV) / 2;
+	// ft_draw_map(cub);
+	// draw_ray(cub);
+	// ft_draw_player(cub);
 	events(cub);
 }
 
