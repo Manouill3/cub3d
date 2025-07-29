@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/24 14:58:31 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/29 12:35:59 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	draw_ray(t_cub *cub)
 		}
 		while (1)
 		{
+			// create_rect(cub, ray_x * 32, ray_y * 32, 32, 32, color(0xFF0000FF));
 			if (cub->map->map[ray_y][ray_x] == '1')
 				break;
-			create_rect(cub, ray_x * 32, ray_y * 32, 32, 32, color(0xFF0000FF));
 			if (distx > disty)
 			{
 				ray_y += cub->player->stepy;
@@ -102,12 +102,12 @@ void    ft_draw_player(t_cub *cub)
 	int win_y;
 	
 	win_y = 0;
-	while (win_y < 32)
+	while (win_y < 8)
 	{
 		win_x = 0;
-		while (win_x < 32)
+		while (win_x < 8)
 		{
-			mlx_pixel_put(cub->mlx, cub->win->window, win_x + cub->player->pos_x * 32, win_y + cub->player->pos_y * 32, color(0x0000FFFF));
+			mlx_pixel_put(cub->mlx, cub->win->window, win_x + cub->player->pos_x * 8, win_y + cub->player->pos_y * 8, color(0x0000FFFF));
 			win_x++;
 		}
 		win_y++;
@@ -130,12 +130,12 @@ void    ft_draw_map(t_cub *cub)
 			if (cub->map->map[y][x] == '1')
 			{
 				win_y = 0;
-				while (win_y < 32)
+				while (win_y < 8)
 				{
 					win_x = 0;
-					while (win_x < 32)
+					while (win_x < 8)
 					{
-						mlx_pixel_put(cub->mlx, cub->win->window, win_x + x * 32, win_y + y * 32, color(0xFFFFFFFF));
+						mlx_pixel_put(cub->mlx, cub->win->window, win_x + x * 8, win_y + y * 8, color(0xFFFFFFFF));
 						win_x++;
 					}
 					win_y++;
@@ -144,12 +144,12 @@ void    ft_draw_map(t_cub *cub)
 			if (cub->map->map[y][x] == '0' || cub->map->map[y][x] == 'N' || cub->map->map[y][x] == 'S' || cub->map->map[y][x] == 'E' || cub->map->map[y][x] == 'W')
 			{
 				win_y = 0;
-				while (win_y < 32)
+				while (win_y < 8)
 				{
 					win_x = 0;
-					while (win_x < 32)
+					while (win_x < 8)
 					{
-						mlx_pixel_put(cub->mlx, cub->win->window, win_x + x * 32, win_y + y * 32, color(0x00FF00FF));
+						mlx_pixel_put(cub->mlx, cub->win->window, win_x + x * 8, win_y + y * 8, color(0x00FF00FF));
 						win_x++;
 					}
 					win_y++;
@@ -170,39 +170,82 @@ void	raycast(t_cub *cub)
 	float	siny;
 	float	delx;
 	float	dely;
-	float	distx;
-	float	disty;
-	float	diff;
+	float	dx;
+	float	dy;
+	float	dist;
+	float	start_y;
+	float	end_y;
 
+	if (cub->player->arrow_left)
+		cub->player->angle -= 1;
+	if (cub->player->arrow_right)
+		cub->player->angle += 1;
 	i = 0;
 	while (i < WIDTH)
 	{	
 		ray_x = (int)cub->player->pos_x;
 		ray_y = (int)cub->player->pos_y;
-		cosx = cos((cub->player->angle % 360) * (PI / 180.0));
-		siny = sin((cub->player->angle % 360) * (PI / 180.0));
+		cosx = cos(((cub->player->angle % 360 - FOV / 2) + i * FOV / WIDTH) * (PI / 180.0));
+		siny = sin(((cub->player->angle % 360 - FOV / 2) + i * FOV / WIDTH) * (PI / 180.0));
 		delx = sqrt(1 + (siny * siny) / (cosx * cosx));
 		dely = sqrt(1 + (cosx * cosx) / (siny * siny));
 		if (cosx > 0)
 		{
 			cub->player->stepx = 1;
-			distx = (1 - (cub->player->pos_x - (float)ray_x)) * delx;
+			dx = (1 - (cub->player->pos_x - (float)ray_x)) * delx;
 		}
 		else
 		{
 			cub->player->stepx = -1;
-			distx = (cub->player->pos_x - (float)ray_x) * delx;
+			dx = (cub->player->pos_x - (float)ray_x) * delx;
 		}
 		if (siny > 0)
 		{
 			cub->player->stepy = 1;
-			disty = (1 - (cub->player->pos_y - (float)ray_y)) * dely;
+			dy = (1 - (cub->player->pos_y - (float)ray_y)) * dely;
 		}
 		else
 		{
 			cub->player->stepy = -1;
-			disty = (cub->player->pos_y - (float)ray_y) * dely;
+			dy = (cub->player->pos_y - (float)ray_y) * dely;
 		}
+		int	side;
+
+		side = 0;
+		while (1)
+		{
+			if (cub->map->map[ray_y][ray_x] == '1')
+				break;
+			if (dx > dy)
+			{
+				ray_y += cub->player->stepy;
+				dy += dely;
+				side = 0;
+			}
+			else
+			{
+				ray_x += cub->player->stepx;
+				dx += delx;
+				side = 1;
+			}
+		}
+		if (side == 1)
+			dist = (dx - delx) * cosf((FOV / 2) * (PI / 180) * (i * 2 / WIDTH - 1));
+		else
+			dist = (dy - dely) * cosf((FOV / 2) * (PI / 180) * (i * 2 / WIDTH - 1));
+		cub->player->height = HEIGHT / dist;
+		start_y = (-cub->player->height / 2) + (HEIGHT / 2);
+		if (start_y < 0)
+			start_y = 0;
+		end_y = start_y + cub->player->height;
+		if (end_y > HEIGHT)
+			end_y = HEIGHT - 1;
+		while (start_y < end_y)
+		{
+			mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, color(0x0000FFFF));
+			start_y++;
+		}
+		i++;
 	}
 }
 
@@ -216,9 +259,10 @@ void    init_win(t_cub *cub)
 	info.height = HEIGHT;
 	cub->win->window = mlx_new_window(cub->mlx, &info);
 	cub->player->angle = (180 - FOV) / 2;
-	// ft_draw_map(cub);
 	// draw_ray(cub);
-	// ft_draw_player(cub);
+	raycast(cub);
+	ft_draw_map(cub);
+	ft_draw_player(cub);
 	events(cub);
 }
 

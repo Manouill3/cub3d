@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 07:26:46 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/17 14:06:20 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/29 09:03:00 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int ft_charac_accetable(char str, t_cub *cub, int x, int y)
     // printf ("caractere = %d\n", str);
     if (str == 'N' || str == 'S' || str == 'E' || str == 'W')
     {
-        cub->player->pos_x = y;
-        cub->player->pos_y = x;
+        cub->player->pos_x = x;
+        cub->player->pos_y = y;
         cub->map->nb_player++;
     }
     if ((str == '0' || str == '1' || str == 'N'

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/24 14:56:55 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/29 10:39:26 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_player
 	// float 	pos_end_y;
 	float	pos_x;
 	float	pos_y;
+	float	dist;
+	int		height;
 	int		stepx;
 	int		stepy;
 	int		angle;
