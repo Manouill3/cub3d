@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/29 13:26:08 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/30 14:51:02 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	draw_ray(t_cub *cub)
 	int	i;
 	float	cosx;
 	float	siny;
-	int	ray_x;
-	int	ray_y;
+	int		ray_x;
+	int		ray_y;
 	float	delx;
 	float	dely;
 	float	distx;
@@ -235,7 +235,6 @@ void	raycast(t_cub *cub)
 			dist = (dx - delx);
 		else
 			dist = (dy - dely);
-		
 		ray_angle = ((cub->player->angle % 360 - FOV / 2) + i * FOV / (float)WIDTH) * (PI / 180.0);
 		player_angle = (cub->player->angle % 360) * (PI / 180.0);
 		dist = dist * cos(ray_angle - player_angle);
@@ -246,10 +245,41 @@ void	raycast(t_cub *cub)
 		end_y = start_y + cub->player->height;
 		if (end_y > HEIGHT)
 			end_y = HEIGHT - 1;
-		while (start_y < end_y)
+		if (side == 0)
 		{
-			mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, color(0x0000FFFF));
-			start_y++;
+			if (cub->player->stepy == - 1)
+			{
+				while (start_y < end_y)
+				{
+					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, color(0x0000FFFF));
+					start_y++;
+				}
+			}
+			else
+			{
+				while (start_y < end_y)
+				{
+					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, color(0xFF0080FF));
+					start_y++;
+				}
+			}
+		}
+		if (side == 1)
+		{
+			if (cub->player->stepx == - 1)
+			{
+				while (start_y < end_y)
+				{
+					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, color(0x8000FFFF));
+					start_y++;
+				}
+			}
+			else
+				while (start_y < end_y)
+				{
+					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, color(0xFF8000FF));
+					start_y++;
+				}
 		}
 		i++;
 	}
