@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/29 12:35:59 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/29 13:26:08 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,8 @@ void	raycast(t_cub *cub)
 	float	dist;
 	float	start_y;
 	float	end_y;
+	float 	player_angle;
+	float 	ray_angle;
 
 	if (cub->player->arrow_left)
 		cub->player->angle -= 1;
@@ -185,8 +187,8 @@ void	raycast(t_cub *cub)
 	{	
 		ray_x = (int)cub->player->pos_x;
 		ray_y = (int)cub->player->pos_y;
-		cosx = cos(((cub->player->angle % 360 - FOV / 2) + i * FOV / WIDTH) * (PI / 180.0));
-		siny = sin(((cub->player->angle % 360 - FOV / 2) + i * FOV / WIDTH) * (PI / 180.0));
+		cosx = cos(((cub->player->angle % 360 - FOV / 2) + i * FOV / (float)WIDTH) * (PI / 180.0));
+		siny = sin(((cub->player->angle % 360 - FOV / 2) + i * FOV / (float)WIDTH) * (PI / 180.0));
 		delx = sqrt(1 + (siny * siny) / (cosx * cosx));
 		dely = sqrt(1 + (cosx * cosx) / (siny * siny));
 		if (cosx > 0)
@@ -230,9 +232,13 @@ void	raycast(t_cub *cub)
 			}
 		}
 		if (side == 1)
-			dist = (dx - delx) * cosf((FOV / 2) * (PI / 180) * (i * 2 / WIDTH - 1));
+			dist = (dx - delx);
 		else
-			dist = (dy - dely) * cosf((FOV / 2) * (PI / 180) * (i * 2 / WIDTH - 1));
+			dist = (dy - dely);
+		
+		ray_angle = ((cub->player->angle % 360 - FOV / 2) + i * FOV / (float)WIDTH) * (PI / 180.0);
+		player_angle = (cub->player->angle % 360) * (PI / 180.0);
+		dist = dist * cos(ray_angle - player_angle);
 		cub->player->height = HEIGHT / dist;
 		start_y = (-cub->player->height / 2) + (HEIGHT / 2);
 		if (start_y < 0)
