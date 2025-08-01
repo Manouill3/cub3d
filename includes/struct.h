@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/29 10:39:26 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/07/31 10:22:00 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	char    **map;
-	int		size_ver;
-	int		nb_player;
+	char    	**map;
+	mlx_image	img;
+	int			size_ver;
+	int			nb_player;
 }   t_map;
 
 typedef struct s_cub

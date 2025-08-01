@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/30 14:51:02 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/07/31 17:13:32 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ void	raycast(t_cub *cub)
 	float	end_y;
 	float 	player_angle;
 	float 	ray_angle;
+	mlx_color pixel_color;
 
 	if (cub->player->arrow_left)
 		cub->player->angle -= 1;
@@ -251,7 +252,8 @@ void	raycast(t_cub *cub)
 			{
 				while (start_y < end_y)
 				{
-					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, color(0x0000FFFF));
+					pixel_color = mlx_get_image_pixel(cub->mlx ,cub->map->img, i, start_y);
+					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
 					start_y++;
 				}
 			}
@@ -288,6 +290,8 @@ void	raycast(t_cub *cub)
 void    init_win(t_cub *cub)
 {
 	mlx_window_create_info info;
+	int w;
+	int h;
 	
 	ft_memset(&info, 0, sizeof(info));
 	info.title = "Cub3D";
@@ -295,6 +299,9 @@ void    init_win(t_cub *cub)
 	info.height = HEIGHT;
 	cub->win->window = mlx_new_window(cub->mlx, &info);
 	cub->player->angle = (180 - FOV) / 2;
+	cub->map->img = mlx_new_image_from_file(cub->mlx,"./includes/pictures/me.png", &w, &h);
+	if (!cub->map->img)
+		exit(1);
 	// draw_ray(cub);
 	raycast(cub);
 	ft_draw_map(cub);
