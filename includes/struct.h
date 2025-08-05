@@ -45,6 +45,8 @@ typedef struct s_map
 {
 	char    	**map;
 	mlx_image	img;
+	int			w_n;
+	int			h_n;
 	int			size_ver;
 	int			nb_player;
 }   t_map;

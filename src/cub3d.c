@@ -177,6 +177,10 @@ void	raycast(t_cub *cub)
 	float	end_y;
 	float 	player_angle;
 	float 	ray_angle;
+	float 	wall_x;
+	float	start_y_tmp;
+	int		tex_x;
+	int		tex_y;
 	mlx_color pixel_color;
 
 	if (cub->player->arrow_left)
@@ -250,9 +254,14 @@ void	raycast(t_cub *cub)
 		{
 			if (cub->player->stepy == - 1)
 			{
+				start_y_tmp = start_y;
 				while (start_y < end_y)
 				{
-					pixel_color = mlx_get_image_pixel(cub->mlx ,cub->map->img, i, start_y);
+					wall_x = cub->player->pos_x + dist * cosx;
+					wall_x = wall_x - floor(wall_x);
+					tex_x = (int)(wall_x * cub->map->w_n);
+					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_n) / cub->player->height);
+					pixel_color = mlx_get_image_pixel(cub->mlx ,cub->map->img, tex_x, tex_y);
 					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
 					start_y++;
 				}
@@ -290,8 +299,6 @@ void	raycast(t_cub *cub)
 void    init_win(t_cub *cub)
 {
 	mlx_window_create_info info;
-	int w;
-	int h;
 	
 	ft_memset(&info, 0, sizeof(info));
 	info.title = "Cub3D";
@@ -299,7 +306,7 @@ void    init_win(t_cub *cub)
 	info.height = HEIGHT;
 	cub->win->window = mlx_new_window(cub->mlx, &info);
 	cub->player->angle = (180 - FOV) / 2;
-	cub->map->img = mlx_new_image_from_file(cub->mlx,"./includes/pictures/me.png", &w, &h);
+	cub->map->img = mlx_new_image_from_file(cub->mlx,"./includes/pictures/me.png", &cub->map->w_n, &cub->map->h_n);
 	if (!cub->map->img)
 		exit(1);
 	// draw_ray(cub);
