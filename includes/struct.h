@@ -44,9 +44,18 @@ typedef struct s_player
 typedef struct s_map
 {
 	char    	**map;
-	mlx_image	img;
+	mlx_image	img_nord;
+	mlx_image	img_sud;
+	mlx_image	img_Est;
+	mlx_image	img_Ouest;
 	int			w_n;
 	int			h_n;
+	int			w_s;
+	int			h_s;
+	int			w_e;
+	int			h_e;
+	int			w_o;
+	int			h_o;
 	int			size_ver;
 	int			nb_player;
 }   t_map;

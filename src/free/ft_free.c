@@ -31,7 +31,10 @@ void	ft_destroy(t_cub *cub)
 {
 	mlx_destroy_window(cub->mlx, cub->win->window);
 	mlx_destroy_context(cub->mlx);
-	mlx_destroy_image(cub->mlx, cub->map->img);
+	mlx_destroy_image(cub->mlx, cub->map->img_nord);
+	mlx_destroy_image(cub->mlx, cub->map->img_sud);
+	mlx_destroy_image(cub->mlx, cub->map->img_Est);
+	mlx_destroy_image(cub->mlx, cub->map->img_Ouest);
 }
 
 void	free_all(t_cub *cub)

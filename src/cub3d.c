@@ -250,18 +250,18 @@ void	raycast(t_cub *cub)
 		end_y = start_y + cub->player->height;
 		if (end_y > HEIGHT)
 			end_y = HEIGHT - 1;
+		start_y_tmp = start_y;
 		if (side == 0)
 		{
 			if (cub->player->stepy == - 1)
 			{
-				start_y_tmp = start_y;
 				while (start_y < end_y)
 				{
 					wall_x = cub->player->pos_x + dist * cosx;
 					wall_x = wall_x - floor(wall_x);
 					tex_x = (int)(wall_x * cub->map->w_n);
 					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_n) / cub->player->height);
-					pixel_color = mlx_get_image_pixel(cub->mlx ,cub->map->img, tex_x, tex_y);
+					pixel_color = mlx_get_image_pixel(cub->mlx ,cub->map->img_nord, tex_x, tex_y);
 					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
 					start_y++;
 				}
@@ -270,7 +270,12 @@ void	raycast(t_cub *cub)
 			{
 				while (start_y < end_y)
 				{
-					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, color(0xFF0080FF));
+					wall_x = cub->player->pos_x + dist * cosx;
+					wall_x = wall_x - floor(wall_x);
+					tex_x = (int)(wall_x * cub->map->w_s);
+					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_s) / cub->player->height);
+					pixel_color = mlx_get_image_pixel(cub->mlx ,cub->map->img_sud, tex_x, tex_y);
+					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
 					start_y++;
 				}
 			}
@@ -281,14 +286,24 @@ void	raycast(t_cub *cub)
 			{
 				while (start_y < end_y)
 				{
-					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, color(0x8000FFFF));
+					wall_x = cub->player->pos_y + dist * siny;
+					wall_x = wall_x - floor(wall_x);
+					tex_x = (int)(wall_x * cub->map->w_o);
+					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_o) / cub->player->height);
+					pixel_color = mlx_get_image_pixel(cub->mlx ,cub->map->img_Ouest, tex_x, tex_y);
+					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
 					start_y++;
 				}
 			}
 			else
 				while (start_y < end_y)
 				{
-					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, color(0xFF8000FF));
+					wall_x = cub->player->pos_y + dist * siny;
+					wall_x = wall_x - floor(wall_x);
+					tex_x = (int)(wall_x * cub->map->w_e);
+					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_e) / cub->player->height);
+					pixel_color = mlx_get_image_pixel(cub->mlx ,cub->map->img_Est, tex_x, tex_y);
+					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
 					start_y++;
 				}
 		}
@@ -306,9 +321,17 @@ void    init_win(t_cub *cub)
 	info.height = HEIGHT;
 	cub->win->window = mlx_new_window(cub->mlx, &info);
 	cub->player->angle = (180 - FOV) / 2;
-	cub->map->img = mlx_new_image_from_file(cub->mlx,"./includes/pictures/me.png", &cub->map->w_n, &cub->map->h_n);
-	if (!cub->map->img)
+	cub->map->img_nord = mlx_new_image_from_file(cub->mlx,"./includes/pictures/me.png", &cub->map->w_n, &cub->map->h_n);
+	if (!cub->map->img_nord )
 		exit(1);
+	cub->map->img_sud = mlx_new_image_from_file(cub->mlx,"./includes/pictures/chat_sud.png", &cub->map->w_s, &cub->map->h_s);
+	cub->map->img_Est = mlx_new_image_from_file(cub->mlx,"./includes/pictures/chat_est.png", &cub->map->w_e, &cub->map->h_e);
+	cub->map->img_Ouest = mlx_new_image_from_file(cub->mlx,"./includes/pictures/chat_ouest.png", &cub->map->w_o, &cub->map->h_o);
+	if (!cub->map->img_Ouest)
+	{
+		perror("Erreur chargement image Ouest");
+		exit(1);
+	}
 	// draw_ray(cub);
 	raycast(cub);
 	ft_draw_map(cub);
