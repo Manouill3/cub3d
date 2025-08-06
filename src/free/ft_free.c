@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 17:33:11 by tcybak            #+#    #+#             */
-/*   Updated: 2025/07/31 17:04:27 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/08/06 14:23:26 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void    ft_free(char **str)
 
 void	ft_destroy(t_cub *cub)
 {
-	mlx_destroy_window(cub->mlx, cub->win->window);
-	mlx_destroy_context(cub->mlx);
 	mlx_destroy_image(cub->mlx, cub->map->img_nord);
 	mlx_destroy_image(cub->mlx, cub->map->img_sud);
 	mlx_destroy_image(cub->mlx, cub->map->img_Est);
 	mlx_destroy_image(cub->mlx, cub->map->img_Ouest);
+	mlx_destroy_window(cub->mlx, cub->win->window);
+	mlx_destroy_context(cub->mlx);
 }
 
 void	free_all(t_cub *cub)
