@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/08/06 14:11:09 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/08/06 14:15:42 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ void	raycast(t_cub *cub)
 	float	start_y_tmp;
 	int		tex_x;
 	int		tex_y;
+	float	dist_wall;
 	mlx_color pixel_color;
 
 	if (cub->player->arrow_left)
@@ -241,6 +242,7 @@ void	raycast(t_cub *cub)
 			dist = (dx - delx);
 		else
 			dist = (dy - dely);
+		dist_wall = dist;
 		ray_angle = ((cub->player->angle % 360 - FOV / 2) + i * FOV / (float)WIDTH) * (PI / 180.0);
 		player_angle = (cub->player->angle % 360) * (PI / 180.0);
 		dist = dist * cos(ray_angle - player_angle);
@@ -254,15 +256,15 @@ void	raycast(t_cub *cub)
 		start_y_tmp = start_y;
 		if (side == 0)
 		{
-			if (cub->player->stepy == - 1)
+			wall_x = cub->player->pos_x + dist_wall * cosx;
+			wall_x = wall_x - floor(wall_x);
+			if (cub->player->stepy == -1)
 			{
 				while (start_y < end_y)
 				{
-					wall_x = cub->player->pos_x + dist * cosx;
-					wall_x = wall_x - floor(wall_x);
-					tex_x = (int)(wall_x * cub->map->w_n);
-					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_n) / cub->player->height);
-					pixel_color = mlx_get_image_pixel(cub->mlx ,cub->map->img_nord, tex_x, tex_y);
+					tex_x = (int)(wall_x * cub->map->w_s);
+					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_s) / cub->player->height);
+					pixel_color = mlx_get_image_pixel(cub->mlx, cub->map->img_sud, tex_x, tex_y);
 					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
 					start_y++;
 				}
@@ -271,11 +273,10 @@ void	raycast(t_cub *cub)
 			{
 				while (start_y < end_y)
 				{
-					wall_x = cub->player->pos_x + dist * cosx;
-					wall_x = wall_x - floor(wall_x);
-					tex_x = (int)(wall_x * cub->map->w_s);
-					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_s) / cub->player->height);
-					pixel_color = mlx_get_image_pixel(cub->mlx ,cub->map->img_sud, tex_x, tex_y);
+					tex_x = (int)(wall_x * cub->map->w_n);
+					// tex_x = cub->map->w_n - tex_x - 1;
+					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_n) / cub->player->height);
+					pixel_color = mlx_get_image_pixel(cub->mlx, cub->map->img_nord, tex_x, tex_y);
 					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
 					start_y++;
 				}
@@ -283,30 +284,31 @@ void	raycast(t_cub *cub)
 		}
 		if (side == 1)
 		{
-			if (cub->player->stepx == - 1)
+			wall_y = cub->player->pos_y + dist_wall * siny;
+			wall_y = wall_y - floor(wall_y);
+			if (cub->player->stepx == -1)
 			{
 				while (start_y < end_y)
 				{
-					wall_y = cub->player->pos_x + dist * siny;
-					wall_y = wall_y - floor(wall_y);
 					tex_x = (int)(wall_y * cub->map->w_o);
 					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_o) / cub->player->height);
-					pixel_color = mlx_get_image_pixel(cub->mlx ,cub->map->img_Ouest, tex_x, tex_y);
+					pixel_color = mlx_get_image_pixel(cub->mlx, cub->map->img_Ouest, tex_x, tex_y);
 					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
 					start_y++;
 				}
 			}
 			else
+			{
 				while (start_y < end_y)
 				{
-					wall_y = cub->player->pos_x + dist * siny;
-					wall_y = wall_y - floor(wall_y);
-					tex_x = (int)(wall_y * cub->map->w_e); 
+					tex_x = (int)(wall_y * cub->map->w_e);
+					// tex_x = cub->map->w_e - tex_x - 1;
 					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_e) / cub->player->height);
-					pixel_color = mlx_get_image_pixel(cub->mlx ,cub->map->img_Est, tex_x, tex_y);
+					pixel_color = mlx_get_image_pixel(cub->mlx, cub->map->img_Est, tex_x, tex_y);
 					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
 					start_y++;
 				}
+			}
 		}
 		i++;
 	}
