@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/31 17:13:32 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/08/06 13:30:02 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ void	raycast(t_cub *cub)
 	float 	player_angle;
 	float 	ray_angle;
 	float 	wall_x;
+	float	wall_y;
 	float	start_y_tmp;
 	int		tex_x;
 	int		tex_y;
@@ -286,9 +287,9 @@ void	raycast(t_cub *cub)
 			{
 				while (start_y < end_y)
 				{
-					wall_x = cub->player->pos_y + dist * siny;
-					wall_x = wall_x - floor(wall_x);
-					tex_x = (int)(wall_x * cub->map->w_o);
+					wall_y = cub->player->pos_x + dist * siny;
+					wall_y = wall_y - floor(wall_y);
+					tex_x = (int)(wall_y * cub->map->w_o);
 					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_o) / cub->player->height);
 					pixel_color = mlx_get_image_pixel(cub->mlx ,cub->map->img_Ouest, tex_x, tex_y);
 					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
@@ -298,9 +299,9 @@ void	raycast(t_cub *cub)
 			else
 				while (start_y < end_y)
 				{
-					wall_x = cub->player->pos_y + dist * siny;
-					wall_x = wall_x - floor(wall_x);
-					tex_x = (int)(wall_x * cub->map->w_e);
+					wall_y = cub->player->pos_x + dist * siny;
+					wall_y = wall_y - floor(wall_y);
+					tex_x = (int)(wall_y * cub->map->w_e); 
 					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_e) / cub->player->height);
 					pixel_color = mlx_get_image_pixel(cub->mlx ,cub->map->img_Est, tex_x, tex_y);
 					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);

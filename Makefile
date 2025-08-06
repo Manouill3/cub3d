@@ -6,7 +6,7 @@
 #    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 06:04:01 by mdegache          #+#    #+#              #
-#    Updated: 2025/08/06 13:11:48 by tcybak           ###   ########.fr        #
+#    Updated: 2025/08/06 13:49:32 by tcybak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,8 +53,8 @@ $(MLX):
 	@$(MAKE) -C $(MLXDIR) -s
 
 $(LIBFT):
-	@$(MAKE) -C $(LIB) bonus
-	@$(MAKE) -C $(MLXDIR)
+	@$(MAKE) -C $(LIB) bonus -s 
+	@$(MAKE) -C $(MLXDIR) -s
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
