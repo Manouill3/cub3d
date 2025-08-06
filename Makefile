@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
+#    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 06:04:01 by mdegache          #+#    #+#              #
-#    Updated: 2025/07/22 06:34:34 by mdegache         ###   ########.fr        #
+#    Updated: 2025/08/06 13:11:48 by tcybak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,10 @@ GREEN=\033[32m
 PURPLE=\033[35m
 RESET=\033[0m
 
+MLXDIR = includes/MacroLibX
+MLX_STATIC = $(MLXDIR)/libmlx_Linux.a
+MLX_SHARED = $(MLXDIR)/libmlx.so
+LIBMLX = $(MLX_SHARED) -lSDL2
 NAME = cub3d
 
 CC = cc
@@ -42,11 +46,15 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(SRC) $(LIBFT) $(CFLAGS) $(LDFLAGS) $(LMFLAGS) -o $(NAME)
+	@$(CC) $(SRC) $(LIBFT) $(CFLAGS) $(LDFLAGS) $(LMFLAGS) $(LIBMLX) -o $(NAME)
 	@echo "$(GREEN)SUCCESS$(RESET)"
 
+$(MLX):
+	@$(MAKE) -C $(MLXDIR) -s
+
 $(LIBFT):
-	@$(MAKE) -s -C $(LIB) bonus
+	@$(MAKE) -C $(LIB) bonus
+	@$(MAKE) -C $(MLXDIR)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)

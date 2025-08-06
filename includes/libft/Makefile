@@ -68,12 +68,12 @@ OBJ_BONUS = $(BONUS:.c=.o) $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		@$(CC) $(SRC) $(CFLAGS)
-		@$(AR) $(NAME) -o $^
+	@$(CC) $(SRC) $(CFLAGS)
+	@$(AR) $(NAME) $(OBJ)
 
 bonus : $(OBJ_BONUS)
-	       	@$(CC) $(SRC) $(BONUS) $(CFLAGS)
-		@$(AR) $(NAME) -o $^
+	@$(CC) $(SRC) $(BONUS) $(CFLAGS)
+	@$(AR) $(NAME) $(OBJ_BONUS)
 
 clean:
 		@rm -f $(OBJ_BONUS)
