@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
 /*   Updated: 2025/08/06 14:15:42 by tcybak           ###   ########.fr       */
@@ -314,6 +314,18 @@ void	raycast(t_cub *cub)
 	}
 }
 
+void	get_player_angle(t_cub *cub)
+{
+	if (cub->player->chara == 'N')
+		cub->player->angle = 270;
+	if (cub->player->chara == 'S')
+		cub->player->angle = 90;
+	if (cub->player->chara == 'E')
+		cub->player->angle = 0;
+	if (cub->player->chara == 'W')
+		cub->player->angle = 180;
+}
+
 void    init_win(t_cub *cub)
 {
 	mlx_window_create_info info;
@@ -323,7 +335,7 @@ void    init_win(t_cub *cub)
 	info.width = WIDTH;
 	info.height = HEIGHT;
 	cub->win->window = mlx_new_window(cub->mlx, &info);
-	cub->player->angle = (180 - FOV) / 2;
+	get_player_angle(cub);
 	cub->map->img_nord = mlx_new_image_from_file(cub->mlx,"./includes/pictures/me.png", &cub->map->w_n, &cub->map->h_n);
 	if (!cub->map->img_nord )
 		exit(1);

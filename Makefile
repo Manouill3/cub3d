@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
+#    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 06:04:01 by mdegache          #+#    #+#              #
-#    Updated: 2025/08/06 13:49:32 by tcybak           ###   ########.fr        #
+#    Updated: 2025/08/06 14:14:28 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,11 +63,13 @@ $(OBJ_DIR)/%.o: %.c
 clean:
 	@rm -rf $(OBJ_DIR)
 	@$(MAKE) -s -C $(LIB) clean
+	@$(MAKE) -s -C $(MLXDIR) clean
 	@echo "$(PURPLE)CLEAN$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) -s -C $(LIB) fclean
+	@$(MAKE) -s -C $(MLXDIR) fclean
 	@echo "$(RED)FCLEAN$(RESET)"
 
 re: fclean all
