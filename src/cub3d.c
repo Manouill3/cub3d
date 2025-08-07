@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/08/06 14:15:42 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/08/07 14:12:56 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ void	raycast(t_cub *cub)
 	int		tex_x;
 	int		tex_y;
 	float	dist_wall;
+	int		y;
 	mlx_color pixel_color;
 
 	if (cub->player->arrow_left)
@@ -260,9 +261,9 @@ void	raycast(t_cub *cub)
 			wall_x = wall_x - floor(wall_x);
 			if (cub->player->stepy == -1)
 			{
+				tex_x = (int)(wall_x * cub->map->w_s);
 				while (start_y < end_y)
 				{
-					tex_x = (int)(wall_x * cub->map->w_s);
 					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_s) / cub->player->height);
 					pixel_color = mlx_get_image_pixel(cub->mlx, cub->map->img_sud, tex_x, tex_y);
 					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
@@ -271,10 +272,9 @@ void	raycast(t_cub *cub)
 			}
 			else
 			{
+				tex_x = (int)(wall_x * cub->map->w_n);
 				while (start_y < end_y)
 				{
-					tex_x = (int)(wall_x * cub->map->w_n);
-					// tex_x = cub->map->w_n - tex_x - 1;
 					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_n) / cub->player->height);
 					pixel_color = mlx_get_image_pixel(cub->mlx, cub->map->img_nord, tex_x, tex_y);
 					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
@@ -288,9 +288,9 @@ void	raycast(t_cub *cub)
 			wall_y = wall_y - floor(wall_y);
 			if (cub->player->stepx == -1)
 			{
+				tex_x = (int)(wall_y * cub->map->w_o);
 				while (start_y < end_y)
 				{
-					tex_x = (int)(wall_y * cub->map->w_o);
 					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_o) / cub->player->height);
 					pixel_color = mlx_get_image_pixel(cub->mlx, cub->map->img_Ouest, tex_x, tex_y);
 					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
@@ -299,16 +299,27 @@ void	raycast(t_cub *cub)
 			}
 			else
 			{
+				tex_x = (int)(wall_y * cub->map->w_e);
 				while (start_y < end_y)
 				{
-					tex_x = (int)(wall_y * cub->map->w_e);
-					// tex_x = cub->map->w_e - tex_x - 1;
 					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_e) / cub->player->height);
 					pixel_color = mlx_get_image_pixel(cub->mlx, cub->map->img_Est, tex_x, tex_y);
 					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
 					start_y++;
 				}
 			}
+		}
+		y = 0;
+		while (y < start_y_tmp)
+		{
+			mlx_pixel_put(cub->mlx, cub->win->window, i, y, color(0x00FFFFFF));
+			y++;
+		}
+		y = end_y;
+		while (y < HEIGHT)
+		{
+			mlx_pixel_put(cub->mlx, cub->win->window, i, y, color(0xf1c232FF));
+			y++;
 		}
 		i++;
 	}
@@ -340,11 +351,21 @@ void    init_win(t_cub *cub)
 	if (!cub->map->img_nord )
 		exit(1);
 	cub->map->img_sud = mlx_new_image_from_file(cub->mlx,"./includes/pictures/chat_sud.png", &cub->map->w_s, &cub->map->h_s);
+	if (!cub->map->img_sud)
+	{
+		ft_destroy(cub);
+		exit(1);
+	}
 	cub->map->img_Est = mlx_new_image_from_file(cub->mlx,"./includes/pictures/chat_est.png", &cub->map->w_e, &cub->map->h_e);
+	if (!cub->map->img_Est)
+	{
+		ft_destroy(cub);
+		exit(1);
+	}
 	cub->map->img_Ouest = mlx_new_image_from_file(cub->mlx,"./includes/pictures/chat_ouest.png", &cub->map->w_o, &cub->map->h_o);
 	if (!cub->map->img_Ouest)
 	{
-		perror("Erreur chargement image Ouest");
+		ft_destroy(cub);
 		exit(1);
 	}
 	// draw_ray(cub);
