@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:30:22 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/17 17:01:48 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/08/07 15:08:29 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int main(int ac, char **av)
 			return (1);
 		}
 		cub3d(cub);
-		mlx_loop(cub->mlx);
 	}
 	else 
 		write(2, "too many or too few arguments\n", 30);

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:13:54 by mdegache          #+#    #+#             */
-/*   Updated: 2025/08/07 13:34:07 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/08/07 15:54:15 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,15 @@ void    move_forward(t_cub *cub)
     cub->player->pos_y += siny;
 }
 
-void    move(int keycode, void *param)
+void    move(t_cub *cub)
 {
-    t_cub   *cub;
-
-    cub = (t_cub *)param;
-    if (keycode == 4)
+    if (cub->key[4] == 1)
         move_left(cub);
-    if (keycode == 7)
+    if (cub->key[7] == 1)
         move_right(cub);
-    if (keycode == 26)
+    if (cub->key[26] == 1)
         move_forward(cub);
-    if (keycode == 22)
+    if (cub->key[22] == 1)
         move_backward(cub);
 }
 
@@ -80,6 +77,15 @@ void handle_key_up(int keycode, void *param)
         cub->player->arrow_right = 0;
     if (keycode == 80)
         cub->player->arrow_left = 0;
+    if (4 == keycode)
+        cub->key[4] = 0;
+    if (7 == keycode)
+        cub->key[7] = 0;
+    if (22 == keycode)
+        cub->key[22] = 0;
+    if (26 == keycode)
+        cub->key[26] = 0;
+    //printf("keycode = %d | 4 = %d | 7 = %d | 22 = %d | 26 = %d\n", keycode, cub->key[4], cub->key[7], cub->key[22], cub->key[26]);  
     return ;
 }
 
@@ -90,4 +96,7 @@ void    events(t_cub *cub)
     mlx_on_event(cub->mlx, cub->win->window, MLX_KEYDOWN, handle_key, (void *)cub);
     mlx_on_event(cub->mlx, cub->win->window, MLX_KEYUP, handle_key_up, (void *)cub);
     mlx_on_event(cub->mlx, cub->win->window, MLX_WINDOW_EVENT, event_window, (void *)cub);
+    mlx_add_loop_hook(cub->mlx, raycast, cub);
+    mlx_set_fps_goal(cub->mlx, 70);
+    mlx_loop(cub->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/08/07 14:12:56 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/08/07 15:55:16 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void    ft_draw_map(t_cub *cub)
 	}
 }
 
-void	raycast(t_cub *cub)
+void	raycast(void *param)
 {
 	int		i;
 	int		ray_x;
@@ -185,7 +185,10 @@ void	raycast(t_cub *cub)
 	float	dist_wall;
 	int		y;
 	mlx_color pixel_color;
+	t_cub	*cub;
 
+	cub = (t_cub *)param;
+	mlx_clear_window(cub->mlx, cub->win->window, color(0x000000FF));
 	if (cub->player->arrow_left)
 		cub->player->angle -= 1;
 	if (cub->player->arrow_right)
@@ -267,8 +270,8 @@ void	raycast(t_cub *cub)
 				while (start_y < end_y)
 				{
 					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_s) / cub->player->height);
-					pixel_color = mlx_get_image_pixel(cub->mlx, cub->map->img_sud, tex_x, tex_y);
-					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
+					pixel_color = mlx_get_image_pixel(cub->mlx, cub->img[SOUTH], tex_x, tex_y);
+					mlx_pixel_put_region(cub->mlx, cub->win->window, i, start_y, 16, 16 , &pixel_color);
 					start_y++;
 				}
 			}
@@ -278,8 +281,8 @@ void	raycast(t_cub *cub)
 				while (start_y < end_y)
 				{
 					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_n) / cub->player->height);
-					pixel_color = mlx_get_image_pixel(cub->mlx, cub->map->img_nord, tex_x, tex_y);
-					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
+					pixel_color = mlx_get_image_pixel(cub->mlx, cub->img[NORTH], tex_x, tex_y);
+					mlx_pixel_put_region(cub->mlx, cub->win->window, i, start_y, 16,  16, &pixel_color);
 					start_y++;
 				}
 			}
@@ -294,8 +297,8 @@ void	raycast(t_cub *cub)
 				while (start_y < end_y)
 				{
 					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_o) / cub->player->height);
-					pixel_color = mlx_get_image_pixel(cub->mlx, cub->map->img_Ouest, tex_x, tex_y);
-					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
+					pixel_color = mlx_get_image_pixel(cub->mlx, cub->img[WEST], tex_x, tex_y);
+					mlx_pixel_put_region(cub->mlx, cub->win->window, i, start_y, 16, 16 , &pixel_color);
 					start_y++;
 				}
 			}
@@ -305,8 +308,8 @@ void	raycast(t_cub *cub)
 				while (start_y < end_y)
 				{
 					tex_y = (int)(((start_y - start_y_tmp) * cub->map->h_e) / cub->player->height);
-					pixel_color = mlx_get_image_pixel(cub->mlx, cub->map->img_Est, tex_x, tex_y);
-					mlx_pixel_put(cub->mlx, cub->win->window, i, start_y, pixel_color);
+					pixel_color = mlx_get_image_pixel(cub->mlx, cub->img[EAST], tex_x, tex_y);
+					mlx_pixel_put_region(cub->mlx, cub->win->window, i, start_y, 16, 16 , &pixel_color);
 					start_y++;
 				}
 			}
@@ -325,6 +328,7 @@ void	raycast(t_cub *cub)
 		}
 		i++;
 	}
+	move(cub);
 }
 
 void	get_player_angle(t_cub *cub)
@@ -344,28 +348,29 @@ void    init_win(t_cub *cub)
 	mlx_window_create_info info;
 	
 	ft_memset(&info, 0, sizeof(info));
+	ft_memset(cub->key, 0, 250);
 	info.title = "Cub3D";
 	info.width = WIDTH;
 	info.height = HEIGHT;
 	cub->win->window = mlx_new_window(cub->mlx, &info);
 	get_player_angle(cub);
-	cub->map->img_nord = mlx_new_image_from_file(cub->mlx,"./includes/pictures/me.png", &cub->map->w_n, &cub->map->h_n);
-	if (!cub->map->img_nord )
+	cub->img[NORTH] = mlx_new_image_from_file(cub->mlx,"./includes/pictures/me.png", &cub->map->w_n, &cub->map->h_n);
+	if (!cub->img[NORTH] )
 		exit(1);
-	cub->map->img_sud = mlx_new_image_from_file(cub->mlx,"./includes/pictures/chat_sud.png", &cub->map->w_s, &cub->map->h_s);
-	if (!cub->map->img_sud)
+	cub->img[SOUTH] = mlx_new_image_from_file(cub->mlx,"./includes/pictures/chat_sud.png", &cub->map->w_s, &cub->map->h_s);
+	if (!cub->img[SOUTH])
 	{
 		ft_destroy(cub);
 		exit(1);
 	}
-	cub->map->img_Est = mlx_new_image_from_file(cub->mlx,"./includes/pictures/chat_est.png", &cub->map->w_e, &cub->map->h_e);
-	if (!cub->map->img_Est)
+	cub->img[EAST] = mlx_new_image_from_file(cub->mlx,"./includes/pictures/chat_est.png", &cub->map->w_e, &cub->map->h_e);
+	if (!cub->img[EAST])
 	{
 		ft_destroy(cub);
 		exit(1);
 	}
-	cub->map->img_Ouest = mlx_new_image_from_file(cub->mlx,"./includes/pictures/chat_ouest.png", &cub->map->w_o, &cub->map->h_o);
-	if (!cub->map->img_Ouest)
+	cub->img[WEST] = mlx_new_image_from_file(cub->mlx,"./includes/pictures/chat_ouest.png", &cub->map->w_o, &cub->map->h_o);
+	if (!cub->img[WEST])
 	{
 		ft_destroy(cub);
 		exit(1);
@@ -373,9 +378,9 @@ void    init_win(t_cub *cub)
 	// draw_ray(cub);
 	cub->player->arrow_left = 0;
 	cub->player->arrow_right = 0;
-	raycast(cub);
-	ft_draw_map(cub);
-	ft_draw_player(cub);
+	//raycast(cub);
+	//ft_draw_map(cub);
+	//ft_draw_player(cub);
 	events(cub);
 }
 

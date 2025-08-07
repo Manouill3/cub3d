@@ -3,34 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/07/29 08:33:36 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/08/07 15:27:13 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INCLUDES_H
 # define INCLUDES_H
 
-#ifndef BUFFER_SIZE
 # define BUFFER_SIZE 42
-#endif
-
-#ifndef FOV
 # define FOV 60
-#endif
+# define PI 3.14159265
+# define WIDTH 1280
+# define HEIGHT 720
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <math.h>
-#include "libft/libft.h"
-#include "MacroLibX/includes/mlx.h"
-#include "MacroLibX/includes/mlx_extended.h"
-#include "MacroLibX/includes/mlx_profile.h"
-#include "struct.h"
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <math.h>
+# include "libft/libft.h"
+# include "MacroLibX/includes/mlx.h"
+# include "MacroLibX/includes/mlx_extended.h"
+# include "MacroLibX/includes/mlx_profile.h"
+# include "struct.h"
 
 //main.c
 
@@ -69,7 +67,7 @@ void        handle_key(int keycode, void *param);
 
 // cub3d
 
-void	    raycast(t_cub *cub);
+void	    raycast(void *param);
 void        cub3d(t_cub *cub);
 void        ft_draw_map(t_cub *cub);
 void        ft_draw_player(t_cub *cub);
@@ -77,7 +75,7 @@ void        draw_ray(t_cub *cub);
 
 //events
 
-void        move(int keycode, void *param);
+void        move(t_cub *cub);
 void        events(t_cub *cub);
 
 #endif
