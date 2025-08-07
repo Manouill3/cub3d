@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:15:27 by mdegache          #+#    #+#             */
-/*   Updated: 2025/08/06 14:15:42 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/08/07 14:09:02 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,9 @@ void	raycast(t_cub *cub)
 		side = 0;
 		while (1)
 		{
-			if (cub->map->map[ray_y][ray_x] == '1')
+			if (ray_y < 0 || ray_x < 0 || ray_y > cub->map->size_ver - 1 || (int)ft_strlen(cub->map->map[ray_y]) < ray_x)
+				return ;
+			if (cub->map->map[ray_y][ray_x] && cub->map->map[ray_y][ray_x] == '1')
 				break;
 			if (dx > dy)
 			{
@@ -348,6 +350,8 @@ void    init_win(t_cub *cub)
 		exit(1);
 	}
 	// draw_ray(cub);
+	cub->player->arrow_left = 0;
+	cub->player->arrow_right = 0;
 	raycast(cub);
 	ft_draw_map(cub);
 	ft_draw_player(cub);
