@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 17:33:11 by tcybak            #+#    #+#             */
-/*   Updated: 2025/08/07 10:47:50 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/08/07 15:04:02 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void    ft_free(char **str)
 
 void	ft_destroy(t_cub *cub)
 {
-	if (cub->map->img_nord)
-		mlx_destroy_image(cub->mlx, cub->map->img_nord);
-	if (cub->map->img_sud)
-		mlx_destroy_image(cub->mlx, cub->map->img_sud);
-	if (cub->map->img_Est)
-		mlx_destroy_image(cub->mlx, cub->map->img_Est);
-	if (cub->map->img_Ouest)
-		mlx_destroy_image(cub->mlx, cub->map->img_Ouest);
+	if (cub->img[NORTH])
+		mlx_destroy_image(cub->mlx, cub->img[NORTH]);
+	if (cub->img[SOUTH])
+		mlx_destroy_image(cub->mlx, cub->img[SOUTH]);
+	if (cub->img[EAST])
+		mlx_destroy_image(cub->mlx, cub->img[EAST]);
+	if (cub->img[WEST])
+		mlx_destroy_image(cub->mlx, cub->img[WEST]);
 	mlx_destroy_window(cub->mlx, cub->win->window);
 	mlx_destroy_context(cub->mlx);
 }

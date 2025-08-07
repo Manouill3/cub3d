@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 06:10:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/08/06 14:07:14 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/08/07 15:19:01 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
-
-#define PI 3.14159265
-#define WIDTH 1280
-#define HEIGHT 720
 
 typedef struct s_win
 {
@@ -45,10 +41,6 @@ typedef struct s_player
 typedef struct s_map
 {
 	char    	**map;
-	mlx_image	img_nord;
-	mlx_image	img_sud;
-	mlx_image	img_Est;
-	mlx_image	img_Ouest;
 	int			w_n;
 	int			h_n;
 	int			w_s;
@@ -61,8 +53,20 @@ typedef struct s_map
 	int			nb_player;
 }   t_map;
 
+typedef enum s_image
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST,
+	SIZE,
+} t_image;
+
+
 typedef struct s_cub
 {
+	mlx_image	img[SIZE];
+	int			key[250];
 	t_map       *map;
 	t_player    *player;
 	t_win		*win;
