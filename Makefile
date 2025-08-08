@@ -6,7 +6,7 @@
 #    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 06:04:01 by mdegache          #+#    #+#              #
-#    Updated: 2025/08/06 15:07:17 by mdegache         ###   ########.fr        #
+#    Updated: 2025/08/08 13:51:00 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ MLXDIR = includes/MacroLibX
 MLX_STATIC = $(MLXDIR)/libmlx_Linux.a
 MLX_SHARED = $(MLXDIR)/libmlx.so
 LIBMLX = $(MLX_SHARED) -lSDL2
-NAME = cub3d
+NAME = cub3D
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g

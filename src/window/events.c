@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:13:54 by mdegache          #+#    #+#             */
-/*   Updated: 2025/08/07 15:54:15 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/08/08 14:34:54 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@ void    move_right(t_cub *cub)
 {
     float   cosx;
     float   siny;
+    float   tmp_x;
+    float   tmp_y;
 
     cosx = cos(((cub->player->angle + 90) % 360) * (PI / 180)) * 0.1;
 	siny = sin(((cub->player->angle + 90) % 360) * (PI / 180)) * 0.1;
+    tmp_x = cub->player->pos_x + cosx;
+    tmp_y = cub->player->pos_y + siny;
     cub->player->pos_x += cosx;
     cub->player->pos_y += siny;
 }
