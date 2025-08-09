@@ -48,12 +48,12 @@ void handle_key(int keycode, void *param)
         cub->key[22] = 1;
     if (26 == keycode)
         cub->key[26] = 1;
-    printf("keycode = %d | 4 = %d | 7 = %d | 22 = %d | 26 = %d\n", keycode, cub->key[4], cub->key[7], cub->key[22], cub->key[26]);
+    // printf("keycode = %d | 4 = %d | 7 = %d | 22 = %d | 26 = %d\n", keycode, cub->key[4], cub->key[7], cub->key[22], cub->key[26]);
     //move(keycode, param);
     //mlx_clear_window(cub->mlx, cub->win->window, color(0x000000FF));
     // draw_ray(cub);
     //raycast(cub);
-    //ft_draw_map(cub);
-    //ft_draw_player(cub);
+    ft_draw_map(cub);
+    ft_draw_player(cub);
     return ;
 }
